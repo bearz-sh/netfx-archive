@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bearz.Xunit.Core", "Xunit.C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bearz.Xunit.Core.Tests", "Xunit.Core\test\Bearz.Xunit.Core.Tests.csproj", "{B49A2519-9979-4739-98BF-47AD48AEFC8A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Internal", "internal\Internal.csproj", "{155CB58A-2CE9-4AE9-9911-31454E129C3A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -54,6 +56,10 @@ Global
 		{B49A2519-9979-4739-98BF-47AD48AEFC8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B49A2519-9979-4739-98BF-47AD48AEFC8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B49A2519-9979-4739-98BF-47AD48AEFC8A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{155CB58A-2CE9-4AE9-9911-31454E129C3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{155CB58A-2CE9-4AE9-9911-31454E129C3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{155CB58A-2CE9-4AE9-9911-31454E129C3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{155CB58A-2CE9-4AE9-9911-31454E129C3A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{2A087488-8DEF-4BA2-98C9-8B3583492955} = {ED123AD4-4D23-42F3-B869-4492A974E7B5}
