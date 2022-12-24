@@ -362,3 +362,31 @@ dotnet_naming_style.s_camelcase.required_suffix =
 dotnet_naming_style.s_camelcase.word_separator = 
 dotnet_naming_style.s_camelcase.capitalization = camel_case
 
+
+# analyzer rules
+dotnet_diagnostic.IDE0045.severity = none # if statement can be simplified should be ignored
+dotnet_diagnostic.IDE0057.severity = none # substring can be simplified is invalide for .NET STANDARD
+
+dotnet_diagnostic.CA1704.severity = none # The spelling dictionary for .NET is hard to use. 
+
+dotnet_diagnostic.SA1308.severity = none # static variables should be prefixed with s_ 
+dotnet_diagnostic.SA1311.severity = none # staic readonly fields should begin s_camecase
+dotnet_diagnostic.SA1402.severity = none # allow multiple types per file.
+dotnet_diagnostic.SA1404.severity = none # suppression justification is not required
+dotnet_diagnostic.SA1503.severity = none # braces are not preferred for brevity
+dotnet_diagnostic.SA1414.severity = none # tuple names are overrated.
+dotnet_diagnostic.SA1505.severity = none # braces are not required for single-line statements
+dotnet_diagnostic.SA1600.severity = none # elements are not required to be documented
+dotnet_diagnostic.SA1601.severity = none # partial elements are not required to be documented.
+dotnet_diagnostic.SA1602.severity = none # enumerations are not required to be documented.
+dotnet_diagnostic.SA1633.severity = none # file should have a copyright header
+
+dotnet_diagnostic.RS0016.severity = none # 
+dotnet_diagnostic.RS0037.severity = none # 
+
+dotnet_diagnostic.S125.severity = none # code in comments are fine when they illustrate issues.
+dotnet_diagnostic.S1117.severity = none # I'm fine with hiding variables of the same name by using the 'this' keyword.
+dotnet_diagnostic.S1135.severity = none # a analyzer should not create a warning for @#$@#$ TODOS.
+dotnet_diagnostic.S1172.severity = none # remove this parameter whose value is ignored... giving false positive
+dotnet_diagnostic.S3267.severity = none # LINQ for all loops is overkill.
+dotnet_diagnostic.S3925.severity = none # overide serialization is giving false positive.
