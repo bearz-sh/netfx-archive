@@ -211,6 +211,26 @@ public static partial class Env
         return Environment.GetEnvironmentVariable(name, target);
     }
 
+    public static IDictionary<string, string> GetAll(EnvironmentVariableTarget target = EnvironmentVariableTarget.Process)
+    {
+        var variables = Environment.GetEnvironmentVariables(target);
+        var result = new Dictionary<string, string>();
+        foreach (var key in variables.Keys)
+        {
+            var name = key as string;
+            if (name is null)
+                continue;
+
+            var value = variables[key] as string;
+            if (value is null)
+                continue;
+
+            result.Add(name, value);
+        }
+
+        return result;
+    }
+
     public static bool TryGet(string name, out string value)
     {
         value = string.Empty;

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 
-namespace Bearz.Collections.Generic;
+namespace Std.Collections.Generic;
 
 /// <summary>
 /// The <see cref="OrderedDictionary{TKey,TValue}"/> allows hash based looks ups of values by a key.
