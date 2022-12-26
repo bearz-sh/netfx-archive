@@ -35,6 +35,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Standard.Text.DotEnv", "Sta
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bearz.Standard.Text.DotEnv", "Standard.Text.DotEnv\src\Bearz.Standard.Text.DotEnv.csproj", "{052F6AC6-5335-443D-8D49-60BEB123223A}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Extensions.Hosting.CommandLine", "Extensions.Hosting.CommandLine", "{A8E0099E-586B-4798-8683-5C7304F88C0D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bearz.Extensions.Hosting.CommandLine", "Extensions.Hosting.CommandLine\src\Bearz.Extensions.Hosting.CommandLine.csproj", "{F6E722B6-0D07-4B0B-88CA-41099EFAC174}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -88,6 +92,10 @@ Global
 		{052F6AC6-5335-443D-8D49-60BEB123223A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{052F6AC6-5335-443D-8D49-60BEB123223A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{052F6AC6-5335-443D-8D49-60BEB123223A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6E722B6-0D07-4B0B-88CA-41099EFAC174}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6E722B6-0D07-4B0B-88CA-41099EFAC174}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6E722B6-0D07-4B0B-88CA-41099EFAC174}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6E722B6-0D07-4B0B-88CA-41099EFAC174}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{2A087488-8DEF-4BA2-98C9-8B3583492955} = {ED123AD4-4D23-42F3-B869-4492A974E7B5}
@@ -99,5 +107,6 @@ Global
 		{F6085432-0F68-4EFF-98E6-F95ACA0BEC5F} = {2B8C1E43-C9C1-4444-A971-0892B7512C54}
 		{396FED7C-F0A9-4386-B44B-F0F4995DA1FA} = {2B8C1E43-C9C1-4444-A971-0892B7512C54}
 		{052F6AC6-5335-443D-8D49-60BEB123223A} = {153C6308-1753-458F-B9D1-8B5BC6F17005}
+		{F6E722B6-0D07-4B0B-88CA-41099EFAC174} = {A8E0099E-586B-4798-8683-5C7304F88C0D}
 	EndGlobalSection
 EndGlobal
