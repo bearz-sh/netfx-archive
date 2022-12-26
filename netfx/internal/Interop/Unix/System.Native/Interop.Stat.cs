@@ -10,7 +10,7 @@ using Microsoft.Win32.SafeHandles;
 // ReSharper disable CheckNamespace
 // ReSharper disable FieldCanBeMadeReadOnly.Global
 // ReSharper disable MemberCanBePrivate.Global
-namespace Std;
+namespace Bearz;
 
 internal static partial class Interop
 {

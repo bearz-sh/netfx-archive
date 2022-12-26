@@ -1,4 +1,4 @@
-namespace Std.Collections.Generic;
+namespace Bearz.Collections.Generic;
 
 public static class ListExtensions
 {

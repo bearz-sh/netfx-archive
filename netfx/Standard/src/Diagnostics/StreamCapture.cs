@@ -1,7 +1,7 @@
 ﻿using System.Text;
 
 // ReSharper disable IntroduceOptionalParameters.Global
-namespace Std.Diagnostics;
+namespace Bearz.Diagnostics;
 
 public class StreamCapture : IProcessCapture, IDisposable
 {

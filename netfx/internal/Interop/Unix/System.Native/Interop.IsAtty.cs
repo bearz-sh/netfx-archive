@@ -8,7 +8,7 @@ using Microsoft.Win32.SafeHandles;
 
 // ReSharper disable InconsistentNaming
 // ReSharper disable CheckNamespace
-namespace Std;
+namespace Bearz;
 
 internal static partial class Interop
 {

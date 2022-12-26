@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Text;
 
-namespace Std.Diagnostics;
+namespace Bearz.Diagnostics;
 
 public static class ProcessExtensions
 {

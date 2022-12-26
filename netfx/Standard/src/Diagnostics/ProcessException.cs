@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace Std.Diagnostics;
+namespace Bearz.Diagnostics;
 
 [Serializable]
 public class ProcessException : Exception

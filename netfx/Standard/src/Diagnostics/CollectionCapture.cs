@@ -1,5 +1,4 @@
-﻿namespace Std.Diagnostics;
-
+﻿namespace Bearz.Diagnostics;
 public class CollectionCapture : IProcessCapture
 {
     private readonly ICollection<string> collection;

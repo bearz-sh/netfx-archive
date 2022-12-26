@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace Std.Text;
+namespace Bearz.Text;
 
 public static class Encodings
 {

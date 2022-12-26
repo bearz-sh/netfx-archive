@@ -6,7 +6,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 
 // ReSharper disable once CheckNamespace
-namespace Std;
+namespace Bearz;
 
 internal static partial class Interop
 {
@@ -28,11 +28,11 @@ internal static partial class Interop
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static extern bool SetConsoleMode(IntPtr handle, int mode);
 
-        internal const int STD_OUTPUT_HANDLE = -11;
+        internal const int Bearz_OUTPUT_HANDLE = -11;
 
-        internal const int STD_INPUT_HANDLE = -10;
+        internal const int Bearz_INPUT_HANDLE = -10;
 
-        internal const int STD_ERROR_HANDLE = -12;
+        internal const int Bearz_ERROR_HANDLE = -12;
 
         internal const int ENABLE_PROCESSED_INPUT = 0x0001;
 

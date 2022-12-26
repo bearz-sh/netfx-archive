@@ -4,7 +4,7 @@
     <TargetFrameworks>$(LibFx)</TargetFrameworks>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <RootNamespace>Std</RootNamespace>
+    <RootNamespace>Bearz</RootNamespace>
       <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   

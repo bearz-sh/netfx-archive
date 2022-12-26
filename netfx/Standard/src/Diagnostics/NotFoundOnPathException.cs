@@ -1,4 +1,4 @@
-﻿namespace Std.Diagnostics;
+﻿namespace Bearz.Diagnostics;
 
 [Serializable]
 public class NotFoundOnPathException : FileNotFoundException

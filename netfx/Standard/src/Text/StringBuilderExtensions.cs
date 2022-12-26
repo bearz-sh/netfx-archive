@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace Std.Text;
+namespace Bearz.Text;
 
 // TODO: polyfill GetChunks
 public static class StringBuilderExtensions

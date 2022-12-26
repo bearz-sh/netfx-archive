@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-namespace Std.Text;
+namespace Bearz.Text;
 
 #pragma warning disable SA1405
 internal ref partial struct ValueStringBuilder

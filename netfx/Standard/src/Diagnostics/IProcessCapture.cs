@@ -1,4 +1,4 @@
-﻿namespace Std.Diagnostics;
+﻿namespace Bearz.Diagnostics;
 
 public interface IProcessCapture
 {

@@ -5,7 +5,7 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
-namespace Std.Text;
+namespace Bearz.Text;
 
 /// <summary>Provide a cached reusable instance of <see cref="StringBuilder"/> per thread.</summary>
 // exclude as the source was copied for the dotnet runtime.
