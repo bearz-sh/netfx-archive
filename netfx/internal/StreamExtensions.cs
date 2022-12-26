@@ -1,6 +1,6 @@
 #if NETLEGACY
 
-namespace Bearz;
+namespace Std;
 
 public static class StreamExtensions
 {

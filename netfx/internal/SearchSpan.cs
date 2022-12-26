@@ -1,4 +1,4 @@
-﻿namespace Bearz;
+﻿namespace Std;
 
 /// <summary>
 /// Struct <see cref="SearchSpan"/> represents the location of a span of text

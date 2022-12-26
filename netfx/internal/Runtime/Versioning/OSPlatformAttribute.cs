@@ -1,6 +1,7 @@
 #if NETLEGACY
 
-namespace Internal.Runtime.Versioning;
+// ReSharper disable once CheckNamespace
+namespace System.Runtime.Versioning;
 
 [AttributeUsage(AttributeTargets.All, AllowMultiple = false)]
 

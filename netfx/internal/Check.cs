@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
 
-namespace Bearz;
+namespace Std;
 
 public static class Check
 {

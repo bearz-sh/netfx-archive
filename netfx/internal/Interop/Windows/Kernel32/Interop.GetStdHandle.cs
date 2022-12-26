@@ -5,7 +5,7 @@ using System;
 using System.Runtime.InteropServices;
 
 // ReSharper disable once CheckNamespace
-namespace Bearz;
+namespace Std;
 
 internal static partial class Interop
 {

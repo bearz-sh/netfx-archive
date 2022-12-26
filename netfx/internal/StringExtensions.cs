@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 
-namespace Bearz;
+namespace Std;
 
 /// <summary>
 /// Class <see cref="StringExtensions" /> extends the <see cref="string"/> class with methods that

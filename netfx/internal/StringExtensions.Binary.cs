@@ -1,6 +1,6 @@
 using System.Text;
 
-namespace Bearz;
+namespace Std;
 
 internal static partial class StringExtensions
 {
