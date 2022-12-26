@@ -1,0 +1,41 @@
+<Project>
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageVersion Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageVersion Include="NuGet.Frameworks" Version="6.1.0" />
+    <PackageVersion Include="coverlet.collector" Version="3.1.0" />
+    <PackageVersion Include="Nullable" Version="1.3.1" />
+    <PackageVersion Include="IsExternalInit" Version="1.0.3" />
+    <PackageVersion Include="DotNet.Glob" Version="3.1.3" />  
+    <PackageVersion Include="Nerdbank.GitVersioning" Version="3.5.119" />
+    <PackageVersion Include="Microsoft.Bcl.HashCode" Version="1.1.1" />
+    <PackageVersion Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" Version="3.3.3" />
+    <PackageVersion Include="Microsoft.CodeAnalysis.BannedApiAnalyzers" Version="3.3.3" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration" Version="7.0.0" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="16.11.0" />
+    <PackageVersion Include="Roslynator.Analyzers" Version="4.2.0" />
+    <PackageVersion Include="DotNetAnalyzers.DocumentationAnalyzers" Version="1.0.0-beta.59" />
+    <PackageVersion Include="ReflectionAnalyzers" Version="0.3.1" />
+    <PackageVersion Include="SecurityCodeScan.VS2019" Version="5.6.7" />
+    <PackageVersion Include="System.Memory" Version="4.5.5" />
+    <PackageVersion Include="System.Security.Principal.Windows" Version="6.0.0-preview.5.21301.5" />
+    <PackageVersion Include="System.Text.Json" Version="7.0.0" />
+    <PackageVersion Include="System.Threading.Tasks.Extensions" Version="4.5.4" />  
+    <PackageVersion Include="System.Diagnostics.DiagnosticSource" Version="7.0.0-rc.2.22472.3" />
+    <PackageVersion Include="StyleCop.Analyzers" Version="1.2.0-beta.435" />
+    <PackageVersion Include="SonarAnalyzer.CSharp" Version="8.51.0.59060" />
+    <PackageVersion Include="Text.Analyzers" Version="3.3.4-beta1.22559.1" />
+    <PackageVersion Include="AsyncFixer" Version="1.6.0" />
+    <PackageVersion Include="xunit.assert" Version="3.4.0" />
+
+    <PackageVersion Include="xunit.abstractions" Version="2.4.1" />
+    <PackageVersion Include="xunit.core" Version="2.4.1" />
+    <PackageVersion Include="xunit" Version="2.4.1" />  
+    <PackageVersion Include="xunit.extensions" Version="2.4.1" />
+    <PackageVersion Include="xunit.runner.visualstudio.utility" Version="2.4.3" />
+    <PackageVersion Include="xunit.runner.visualstudio" Version="2.4.3" />
+    <PackageVersion Include="xunit.runner.utility" Version="2.4.1" />
+  </ItemGroup>
+</Project>

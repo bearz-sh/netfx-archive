@@ -1,5 +1,8 @@
 using System.Text;
 
+using Bearz.Extra.Memory;
+using Bearz.Extra.Strings;
+
 namespace Bearz.Std;
 
 public ref struct PathSpan
@@ -347,11 +350,7 @@ public ref struct PathSpan
         if (this.expanded != null)
             return this.expanded;
 
-#if NETLEGACY
-        this.expanded = new string(this.span.ToArray());
-#else
-        this.expanded = this.span.ToString();
-#endif
+        this.expanded = this.span.AsString();
         return this.expanded;
     }
 }

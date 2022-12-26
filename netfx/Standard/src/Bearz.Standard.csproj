@@ -29,11 +29,11 @@
   </ItemGroup>
 
   <ItemGroup Condition="$(NetLegacy) == 'true'">
-    <PackageReference Include="System.Memory" Version="$(MemoryVersion)" />
-    <PackageReference Include="Microsoft.Bcl.HashCode" Version="1.1.1" />
-    <PackageReference Include="System.Text.Json" Version="$(SystemTextJsonVersion)" />
-    <PackageReference Include="System.Security.Principal.Windows" Version="$(SecurityPrincipalWindowsVersion)" />
-    <PackageReference Include="System.Diagnostics.DiagnosticSource" Version="$(DiagnosticSourceVersion)" />
+    <PackageReference Include="System.Memory"  />
+    <PackageReference Include="Microsoft.Bcl.HashCode" />
+    <PackageReference Include="System.Text.Json" />
+    <PackageReference Include="System.Security.Principal.Windows"  />
+    <PackageReference Include="System.Diagnostics.DiagnosticSource" />
   </ItemGroup>
 
   <ItemGroup>
@@ -42,6 +42,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="DotNet.Glob" Version="3.1.3" />
+    <PackageReference Include="DotNet.Glob" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Secrets" />
   </ItemGroup>
 </Project>

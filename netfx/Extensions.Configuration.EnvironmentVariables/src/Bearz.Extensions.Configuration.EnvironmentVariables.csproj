@@ -1,18 +1,18 @@
-<!--suppress MsbuildTargetFrameworkTagInspection -->
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <LibFx Condition="$(NetCoreLibFx) == ''">net7.0</LibFx>
-    <TargetFrameworks>$(NetCoreLibFx)</TargetFrameworks>
+    <LibFx Condition="$(LibFx) == ''">net7.0</LibFx>
+    <TargetFrameworks>$(LibFx)</TargetFrameworks>
     <Nullable>enable</Nullable>
-    <RootNamespace>Bearz.Security.Cryptography.X509Certificates</RootNamespace>
+    <ImplicitUsings>true</ImplicitUsings>
+    <RootNamespace>Bearz.Extensions.Configuration.EnvironmentVariables</RootNamespace>
   </PropertyGroup>
 
   <PropertyGroup>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageTags></PackageTags>
     <Description>
-    Bearz.Security.Cryptography.X509Certificates
+    Bearz.Extensions.Configuration.EnvironmentVariables
     </Description>
     <PackageReleaseNotes>$([System.IO.File]::ReadAllText("$(MSBuildProjectDirectory)/CHANGELOG.md"))</PackageReleaseNotes>
   </PropertyGroup>
@@ -21,13 +21,13 @@
     <None Include="README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
-    <ItemGroup Condition="'$(NetLegacy)' == 'true'">
-        <PackageReference Include="System.Memory" />
-    </ItemGroup>
-
   <ItemGroup>
     <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
       <_Parameter1>$(AssemblyName).Tests</_Parameter1>
     </AssemblyAttribute>
   </ItemGroup>
+    
+   <ItemGroup>
+       <PackageReference Include="Microsoft.Extensions.Configuration" />
+   </ItemGroup> 
 </Project>

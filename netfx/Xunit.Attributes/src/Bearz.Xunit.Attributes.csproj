@@ -48,7 +48,7 @@ Examples can be found in the project's test source code.
 
 
     <ItemGroup>
-    <PackageReference Include="NuGet.Frameworks" Version="6.1.0" />
-    <PackageReference Include="xunit.core" Version="2.4.1" />
+    <PackageReference Include="NuGet.Frameworks" />
+    <PackageReference Include="xunit.core" />
   </ItemGroup>
 </Project>
