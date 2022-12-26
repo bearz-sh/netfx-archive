@@ -1,10 +1,10 @@
-namespace Bearz.Collections.Generic;
+namespace Bearz.Extra.Collections;
 
 public static class ListExtensions
 {
     public static T Pop<T>(this List<T> list)
     {
-        var item = list[list.Count - 1];
+        var item = list[^1];
         list.RemoveAt(list.Count - 1);
         return item;
     }

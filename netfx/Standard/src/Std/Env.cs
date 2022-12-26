@@ -1,6 +1,10 @@
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 
+#if NETLEGACY
+using Bearz.Extra.Strings;
+#endif
+
 // ReSharper disable InconsistentNaming
 namespace Bearz.Std;
 

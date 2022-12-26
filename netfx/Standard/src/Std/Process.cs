@@ -1,6 +1,8 @@
 using System.Collections.Concurrent;
 using System.Diagnostics;
 
+using Bearz.Extra.Strings;
+
 using Proc = System.Diagnostics.Process;
 
 namespace Bearz.Std;
