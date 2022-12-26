@@ -29,8 +29,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bearz.Standard", "Standard\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bearz.Stardard.Tests", "Standard\test\Bearz.Stardard.Tests.csproj", "{396FED7C-F0A9-4386-B44B-F0F4995DA1FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Internal", "internal\Internal.csproj", "{F695C2B3-B270-42DA-B7D7-2A3B3505EF7E}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Extensions.Hosting.CommandLine", "Extensions.Hosting.CommandLine", "{A8E0099E-586B-4798-8683-5C7304F88C0D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bearz.Extensions.Hosting.CommandLine", "Extensions.Hosting.CommandLine\src\Bearz.Extensions.Hosting.CommandLine.csproj", "{F6E722B6-0D07-4B0B-88CA-41099EFAC174}"
@@ -84,10 +82,6 @@ Global
 		{396FED7C-F0A9-4386-B44B-F0F4995DA1FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{396FED7C-F0A9-4386-B44B-F0F4995DA1FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{396FED7C-F0A9-4386-B44B-F0F4995DA1FA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F695C2B3-B270-42DA-B7D7-2A3B3505EF7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F695C2B3-B270-42DA-B7D7-2A3B3505EF7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F695C2B3-B270-42DA-B7D7-2A3B3505EF7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F695C2B3-B270-42DA-B7D7-2A3B3505EF7E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F6E722B6-0D07-4B0B-88CA-41099EFAC174}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F6E722B6-0D07-4B0B-88CA-41099EFAC174}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F6E722B6-0D07-4B0B-88CA-41099EFAC174}.Release|Any CPU.ActiveCfg = Release|Any CPU
