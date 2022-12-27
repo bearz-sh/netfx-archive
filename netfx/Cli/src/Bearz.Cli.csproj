@@ -6,14 +6,13 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>true</ImplicitUsings>
     <RootNamespace>Bearz</RootNamespace>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
   <PropertyGroup>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageTags></PackageTags>
     <Description>
-    Bearz.Standard
+    Bearz.Cli
     </Description>
     <PackageReleaseNotes>$([System.IO.File]::ReadAllText("$(MSBuildProjectDirectory)/CHANGELOG.md"))</PackageReleaseNotes>
   </PropertyGroup>
@@ -28,24 +27,7 @@
     </AssemblyAttribute>
   </ItemGroup>
 
-  <ItemGroup Condition="$(NetLegacy) == 'true'">
-    <PackageReference Include="System.Memory" />
-    <PackageReference Include="Microsoft.Bcl.HashCode" />
-    <PackageReference Include="System.Text.Json" />
-    <PackageReference Include="System.Security.Principal.Windows" />
-    <PackageReference Include="System.Diagnostics.DiagnosticSource" />
-  </ItemGroup>
-
   <ItemGroup>
-    <Compile Include="$(InternalDir)/Index.cs" Link="Index.cs" />
-    <Compile Include="$(InternalDir)/Range.cs" Link="Range.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="DotNet.Glob" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Secrets" />
+    <ProjectReference Include="..\..\Standard\src\Bearz.Standard.csproj" />
   </ItemGroup>
 </Project>

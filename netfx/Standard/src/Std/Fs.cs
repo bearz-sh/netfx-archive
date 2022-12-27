@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
 using Bearz.Text;
@@ -24,6 +25,29 @@ public static class Fs
     public static Task<string> ReadTextFileAsync(string path, Encoding? encoding = null, CancellationToken cancellationToken = default)
         => File.ReadAllTextAsync(path, encoding ?? Encodings.Utf8NoBom, cancellationToken);
 #endif
+
+    public static string CatFiles(bool throwIfNotFound, params string[] files)
+    {
+        var sb = StringBuilderCache.Acquire();
+        foreach (var file in files)
+        {
+            if (throwIfNotFound && !File.Exists(file))
+                throw new FileNotFoundException($"File not found: {file}");
+
+            if (sb.Length > 0)
+                sb.Append('\n');
+
+            sb.Append(ReadTextFile(file));
+        }
+
+        return StringBuilderCache.GetStringAndRelease(sb);
+    }
+
+    public static bool FileExists([NotNullWhen(true)] string? path)
+        => File.Exists(path);
+
+    public static bool DirectoryExits([NotNullWhen(true)] string? path)
+        => Directory.Exists(path);
 
     public static void WriteFile(string path, byte[] data)
         => File.WriteAllBytes(path, data);
