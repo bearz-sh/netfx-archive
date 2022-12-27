@@ -2,6 +2,7 @@ using System.Text;
 
 using Bearz.Extra.Memory;
 using Bearz.Extra.Strings;
+using Bearz.Text;
 
 namespace Bearz.Std;
 

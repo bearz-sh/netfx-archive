@@ -12,7 +12,7 @@
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageTags></PackageTags>
     <Description>
-    Bearz.Standard.Text.DotEnv
+    Bearz.Templates.Handlebars
     </Description>
     <PackageReleaseNotes>$([System.IO.File]::ReadAllText("$(MSBuildProjectDirectory)/CHANGELOG.md"))</PackageReleaseNotes>
   </PropertyGroup>
@@ -28,11 +28,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Standard\src\Bearz.Standard.csproj" />
+    <PackageReference Include="Handlebars.Net" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" />
   </ItemGroup>
 
-  <ItemGroup Condition="$(NetLegacy) == 'true'">
-    <Compile Include="$(InternalDir)/Index.cs" Link="Index.cs" />
-    <Compile Include="$(InternalDir)/Range.cs" Link="Range.cs" />
+  <ItemGroup>
+    <ProjectReference Include="..\..\Standard\src\Bearz.Standard.csproj" />
   </ItemGroup>
 </Project>

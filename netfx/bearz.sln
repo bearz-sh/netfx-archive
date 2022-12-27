@@ -59,6 +59,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".root", ".root", "{C1485CB6
 		version.json = version.json
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Templates.Handlebars", "Templates.Handlebars", "{6362B6A5-A985-4EB3-94F1-672EEB0DCF7F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bearz.Templates.Handlebars", "Templates.Handlebars\src\Bearz.Templates.Handlebars.csproj", "{DC1ECA4E-8F6D-4334-922D-6AA43D99AABC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -124,6 +128,10 @@ Global
 		{79F8D6ED-CA58-4EB6-BCF5-B8AA44AC68F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{79F8D6ED-CA58-4EB6-BCF5-B8AA44AC68F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{79F8D6ED-CA58-4EB6-BCF5-B8AA44AC68F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC1ECA4E-8F6D-4334-922D-6AA43D99AABC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC1ECA4E-8F6D-4334-922D-6AA43D99AABC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC1ECA4E-8F6D-4334-922D-6AA43D99AABC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC1ECA4E-8F6D-4334-922D-6AA43D99AABC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{2A087488-8DEF-4BA2-98C9-8B3583492955} = {ED123AD4-4D23-42F3-B869-4492A974E7B5}
@@ -139,5 +147,6 @@ Global
 		{9455EB19-58C5-4E97-85C4-70FFFF66C612} = {A92EFD0C-FF93-40A1-ABEB-D7D5DC5D3A57}
 		{32BACBDE-3FB1-42B3-B829-70F937F49A52} = {0D073794-3059-4620-885B-4082DE68FC8B}
 		{79F8D6ED-CA58-4EB6-BCF5-B8AA44AC68F7} = {EF609593-CF87-44E9-985C-C3F00D53A2A8}
+		{DC1ECA4E-8F6D-4334-922D-6AA43D99AABC} = {6362B6A5-A985-4EB3-94F1-672EEB0DCF7F}
 	EndGlobalSection
 EndGlobal
