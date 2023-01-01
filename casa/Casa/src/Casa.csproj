@@ -24,11 +24,4 @@
     <ProjectReference Include="..\..\Tasks\src\Casa.Tasks.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Cmds\Environments\Var" />
-    <Folder Include="Cmds\Secret" />
-    <Folder Include="Cmds\Stack" />
-    <Folder Include="Cmds\Vars" />
-  </ItemGroup>
-
 </Project>

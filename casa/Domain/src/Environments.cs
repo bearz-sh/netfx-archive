@@ -3,6 +3,8 @@ using Bearz.Security.Cryptography;
 using Microsoft.EntityFrameworkCore;
 
 using DbEnvironment = Casa.Data.Model.Environment;
+using DbSecret = Casa.Data.Model.Secret;
+using DbVariable = Casa.Data.Model.EnvironmentVariable;
 
 namespace Casa.Domain;
 
@@ -30,9 +32,17 @@ public class Environments
     public bool Delete(string name)
     {
         var lowered = name.ToLower();
-        var entity = this.db.Set<DbEnvironment>().FirstOrDefault(x => x.LoweredName == lowered);
+        var entity = this.db.Set<DbEnvironment>()
+            .Include(o => o.Secrets)
+            .Include(o => o.Variables)
+            .AsSplitQuery().FirstOrDefault(x => x.LoweredName == lowered);
         if (entity is null)
             return false;
+
+        var secrets = this.db.Set<DbSecret>();
+        var variables = this.db.Set<DbVariable>();
+        variables.RemoveRange(entity.Variables);
+        secrets.RemoveRange(entity.Secrets);
 
         this.db.Set<DbEnvironment>().Remove(entity);
         this.db.SaveChanges();
@@ -42,7 +52,11 @@ public class Environments
     public Environment GetOrCreate(string name)
     {
         var lowered = name.ToLower();
-        var entity = this.db.Set<DbEnvironment>().FirstOrDefault(o => o.LoweredName == lowered);
+        var entity = this.db.Set<DbEnvironment>()
+            .Include(o => o.Variables)
+            .Include(o => o.Secrets)
+            .AsSplitQuery()
+            .FirstOrDefault(o => o.LoweredName == lowered);
         if (entity is not null)
             return new Environment(this.db, entity, this.cipher);
 
@@ -55,7 +69,11 @@ public class Environments
     public Environment? Get(string name)
     {
         var lowered = name.ToLower();
-        var entity = this.db.Set<DbEnvironment>().FirstOrDefault(o => o.LoweredName == lowered);
+        var entity = this.db.Set<DbEnvironment>()
+            .Include(o => o.Variables)
+            .Include(o => o.Secrets)
+            .AsSplitQuery()
+            .FirstOrDefault(o => o.LoweredName == lowered);
         if (entity is not null)
             return new Environment(this.db, entity, this.cipher);
 

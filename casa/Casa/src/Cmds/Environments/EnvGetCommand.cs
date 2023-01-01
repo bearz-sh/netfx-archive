@@ -7,20 +7,20 @@ using Casa.Domain;
 
 namespace Casa.Cmds.Environments;
 
-[CommandHandler(typeof(GetCommandHandler))]
-public class GetCommand : Command
+[CommandHandler(typeof(EnvGetCommandHandler))]
+public class EnvGetCommand : Command
 {
-    public GetCommand()
+    public EnvGetCommand()
         : base("get", "Gets this current environment.")
     {
     }
 }
 
-public class GetCommandHandler : ICommandHandler
+public class EnvGetCommandHandler : ICommandHandler
 {
     private readonly Settings settings;
 
-    public GetCommandHandler(Settings settings)
+    public EnvGetCommandHandler(Settings settings)
     {
         this.settings = settings;
     }

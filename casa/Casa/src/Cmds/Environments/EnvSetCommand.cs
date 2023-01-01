@@ -7,23 +7,23 @@ using Casa.Domain;
 
 namespace Casa.Cmds.Environments;
 
-[CommandHandler(typeof(SetCommandHandler))]
-public class SetCommand : Command
+[CommandHandler(typeof(EnvSetCommandHandler))]
+public class EnvSetCommand : Command
 {
-    public SetCommand()
+    public EnvSetCommand()
         : base("set", "Set the deployment environment")
     {
         this.AddArgument(new Argument<string>("name", "The name of the environment variable"));
     }
 }
 
-public class SetCommandHandler : ICommandHandler
+public class EnvSetCommandHandler : ICommandHandler
 {
     private readonly Settings settings;
 
     private readonly Casa.Domain.Environments environments;
 
-    public SetCommandHandler(Settings settings, Casa.Domain.Environments environments)
+    public EnvSetCommandHandler(Settings settings, Casa.Domain.Environments environments)
     {
         this.settings = settings;
         this.environments = environments;

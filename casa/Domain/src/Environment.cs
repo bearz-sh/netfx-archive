@@ -76,7 +76,6 @@ public class Environment
     public string? GetVariable(string name)
     {
         name = NormalizeEnvName(name);
-
         if (this.environmentVariables.TryGetValue(name, out var variable))
         {
             return variable.Value;
@@ -100,7 +99,7 @@ public class Environment
         }
 
         secret.Value = value;
-        this.Save();
+        this.db.SaveChanges();
         this.secrets[name] = secret;
     }
 
@@ -121,7 +120,7 @@ public class Environment
         secret.Value = value;
         secret.ExpiresAt = expiresAt;
 
-        this.Save();
+        this.db.SaveChanges();
         this.secrets[name] = secret;
     }
 
@@ -149,7 +148,7 @@ public class Environment
         }
 
         secret.Model.Tags = secret.Tags;
-        this.Save();
+        this.db.SaveChanges();
         this.secrets[name] = secret;
     }
 
@@ -173,7 +172,7 @@ public class Environment
             variable = new EnvironmentVariable(dbVariable);
         }
 
-        this.Save();
+        this.db.SaveChanges();
         this.environmentVariables[name] = variable;
     }
 
@@ -191,7 +190,7 @@ public class Environment
 
         model.Value = variable.Value;
 
-        this.Save();
+        this.db.SaveChanges();
 
         this.environmentVariables[variable.Name] = model;
     }

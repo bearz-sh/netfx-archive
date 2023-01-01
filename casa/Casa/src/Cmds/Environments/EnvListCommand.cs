@@ -5,20 +5,20 @@ using Bearz.Extensions.Hosting.CommandLine;
 
 namespace Casa.Cmds.Environments;
 
-[CommandHandler(typeof(ListCommandHandler))]
-public class ListCommand : Command
+[CommandHandler(typeof(EnvListCommandHandler))]
+public class EnvListCommand : Command
 {
-    public ListCommand()
+    public EnvListCommand()
         : base("list", "List all environments")
     {
     }
 }
 
-public class ListCommandHandler : ICommandHandler
+public class EnvListCommandHandler : ICommandHandler
 {
     private readonly Casa.Domain.Environments environments;
 
-    public ListCommandHandler(Casa.Domain.Environments environments)
+    public EnvListCommandHandler(Casa.Domain.Environments environments)
     {
         this.environments = environments;
     }
