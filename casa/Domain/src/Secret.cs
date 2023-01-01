@@ -33,7 +33,7 @@ public class Secret
             if (this.model.Value.Length == 0)
                 return string.Empty;
 
-            var bytes = Encodings.Utf8NoBom.GetBytes(this.model.Value);
+            var bytes = Convert.FromBase64String(this.model.Value);
             var decrypted = this.cipher.Decrypt(bytes);
             this.value = Encodings.Utf8NoBom.GetString(decrypted);
             return this.value;
@@ -49,7 +49,7 @@ public class Secret
             }
 
             this.value = value;
-            var bytes = Convert.FromBase64String(this.model.Value);
+            var bytes = Encodings.Utf8NoBom.GetBytes(this.value);
             var encrypted = this.cipher.Encrypt(bytes);
             this.model.Value = Convert.ToBase64String(encrypted);
         }

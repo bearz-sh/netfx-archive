@@ -44,7 +44,6 @@ public class AesGcmEncryptionProvider : IEncryptionProvider
         using var aes = new AesGcm(this.key);
         aes.Encrypt(nonce, data, cipherBytes, tag);
 
-        // Encode for transmission
         return encryptedData;
     }
 
@@ -66,6 +65,7 @@ public class AesGcmEncryptionProvider : IEncryptionProvider
         var nonce = encryptedData.Slice(4, nonceSize);
         var tag = encryptedData.Slice(4 + nonceSize + 4, tagSize);
         var cipherBytes = encryptedData.Slice(4 + nonceSize + 4 + tagSize, cipherSize);
+
 
         // Decrypt
         Span<byte> plainBytes = new byte[cipherSize];

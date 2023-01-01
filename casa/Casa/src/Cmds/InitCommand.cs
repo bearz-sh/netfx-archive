@@ -82,10 +82,13 @@ public class InitCommandHandler : ICommandHandler
         var appSettings = Path.Join(Paths.EtcDir, "casa.json");
         if (!Fs.FileExists(appSettings))
         {
-            var secret = new SecretGenerator().AddDefaults().GenerateAsString(20);
+            var pg = new SecretGenerator().AddDefaults();
+            var secret = pg.GenerateAsString(20);
+            var salt = pg.GenerateAsString(20);
             var json = new
             {
                 cipherKey = secret,
+                cipherSalt = salt,
                 database = new
                 {
                     kind = "sqlite",

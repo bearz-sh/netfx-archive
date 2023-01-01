@@ -1,7 +1,10 @@
 using System.ComponentModel.Composition.Hosting;
+using System.Security.Cryptography;
+using System.Text;
 
 using Bearz.Extensions.Hosting.CommandLine;
 using Bearz.Security.Cryptography;
+using Bearz.Std;
 using Bearz.Text;
 
 using Casa.Data.Model;
@@ -11,6 +14,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+
+using Path = System.IO.Path;
 
 namespace Casa;
 
@@ -33,8 +38,11 @@ public static class Startup
         builder.Services.TryAddSingleton<IEncryptionProvider>(s =>
         {
             var cfg = s.GetRequiredService<IConfiguration>();
-            var key = cfg.GetValue<string>("cipherKey") ?? throw new InvalidOperationException("Missing cipherKey");
-            return new AesGcmEncryptionProvider(Encodings.Utf8NoBom.GetBytes(key));
+            var key = cfg.GetValue<string>("cipherKey") ?? Env.Get("CASA_CIPHER_KEY") ?? throw new InvalidOperationException("Missing cipherKey");
+            var salt = cfg.GetValue<string>("cipherSalt") ?? Env.Get("CASA_CIPHER_SALT") ?? throw new InvalidOperationException("Missing cipherSalt");
+            using var pbkdf2 = new Rfc2898DeriveBytes(key, Encoding.UTF8.GetBytes(salt), 100000, HashAlgorithmName.SHA256);
+            var bytes = pbkdf2.GetBytes(32);
+            return new AesGcmEncryptionProvider(bytes);
         });
         builder.Services.TryAddSingleton<Settings>();
         builder.Services.TryAddSingleton<Environments>();
