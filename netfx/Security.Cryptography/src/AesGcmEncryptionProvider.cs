@@ -1,11 +1,8 @@
+#if !NETLEGACY
 using System.Buffers.Binary;
 using System.Security.Cryptography;
-using System.Text;
-using System.Xml;
 
 namespace Bearz.Security.Cryptography;
-
-#if !NETLEGACY
 
 public class AesGcmEncryptionProvider : IEncryptionProvider
 {
@@ -59,6 +56,7 @@ public class AesGcmEncryptionProvider : IEncryptionProvider
     public ReadOnlySpan<byte> Decrypt(ReadOnlySpan<byte> data)
     {
         var encryptedData = data;
+
         // Extract parameter sizes
         int nonceSize = BinaryPrimitives.ReadInt32LittleEndian(encryptedData.Slice(0, 4));
         int tagSize = BinaryPrimitives.ReadInt32LittleEndian(encryptedData.Slice(4 + nonceSize, 4));

@@ -4,9 +4,10 @@ using System.ComponentModel.Composition;
 namespace Bearz.Extensions.Hosting.CommandLine;
 
 [AttributeUsage(AttributeTargets.Class, Inherited = true, AllowMultiple = false)]
-public sealed class CommandHandlerAttribute : Attribute
+public sealed class SubCommandHandlerAttribute : ExportAttribute
 {
-    public CommandHandlerAttribute(Type commandHandlerType)
+    public SubCommandHandlerAttribute(Type commandHandlerType)
+        : base(typeof(Command))
     {
         this.CommandHandlerType = commandHandlerType;
     }

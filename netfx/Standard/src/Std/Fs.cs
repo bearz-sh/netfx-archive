@@ -1,4 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
+using System.Runtime.InteropServices;
 using System.Text;
 
 using Bearz.Text;
@@ -8,10 +9,18 @@ using File = System.IO.File;
 
 namespace Bearz.Std;
 
-public static class Fs
+public static partial class Fs
 {
     public static byte[] ReadFile(string path)
         => File.ReadAllBytes(path);
+
+    public static void Chown(string path, int userId, int groupId)
+    {
+        if (!Env.IsWindows())
+        {
+            ChOwn(path, userId, groupId);
+        }
+    }
 
 #if NET6_0_OR_GREATER
     public static Task<byte[]> ReadFileAsync(string path, CancellationToken cancellationToken = default)
@@ -115,4 +124,18 @@ public static class Fs
 
     public static void RemoveDirectory(string path, bool recursive = false)
         => Directory.Delete(path, recursive);
+
+#if NET7_0_OR_GREATER
+    [LibraryImport("libc", EntryPoint = "chown", StringMarshalling = StringMarshalling.Utf8, SetLastError = true)]
+    internal static partial int ChOwn(string path, int owner, int group);
+
+    [LibraryImport("libc", EntryPoint = "lchown", StringMarshalling = StringMarshalling.Utf8, SetLastError = true)]
+    internal static partial int LChOwn(string path, int owner, int group);
+#else
+    [DllImport("libc", EntryPoint = "chown", SetLastError = true)]
+    internal static extern int ChOwn(string path, int owner, int group);
+
+    [DllImport("libc", EntryPoint = "chown", SetLastError = true)]
+    internal static extern int LChOwn(string path, int owner, int group);
+#endif
 }

@@ -46,7 +46,7 @@
     <Windows>false</Windows>
     <Linux>false</Linux>
     <MacOs>false</MacOs>
-    <InternalDir>$(MSBuildThisFileDirectory)internal/</InternalDir>
+    <InternalDir>$(MSBuildThisFileDirectory)/netfx/internal/</InternalDir>
     <NetLegacy>false</NetLegacy>
   </PropertyGroup>
   <PropertyGroup>

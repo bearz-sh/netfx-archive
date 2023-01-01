@@ -1,0 +1,34 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CloudFlare.Client" />
+    <PackageReference Include="EFCore.NamingConventions" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\netfx\Extensions.Hosting.CommandLine\src\Bearz.Extensions.Hosting.CommandLine.csproj" />
+    <ProjectReference Include="..\..\..\netfx\Security.Cryptography\src\Bearz.Security.Cryptography.csproj" />
+    <ProjectReference Include="..\..\..\netfx\Standard\src\Bearz.Standard.csproj" />
+    <ProjectReference Include="..\..\..\netfx\Text.DotEnv\src\Bearz.Text.DotEnv.csproj" />
+    <ProjectReference Include="..\..\Core\src\Casa.Core.csproj" />
+    <ProjectReference Include="..\..\Data\src\Casa.Data.csproj" />
+    <ProjectReference Include="..\..\Domain\src\Casa.Domain.csproj" />
+    <ProjectReference Include="..\..\Tasks\src\Casa.Tasks.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Cmds\Environments\Var" />
+    <Folder Include="Cmds\Secret" />
+    <Folder Include="Cmds\Stack" />
+    <Folder Include="Cmds\Vars" />
+  </ItemGroup>
+
+</Project>

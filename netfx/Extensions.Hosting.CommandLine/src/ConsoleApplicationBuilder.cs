@@ -230,6 +230,14 @@ public class ConsoleApplicationBuilder
             {
                 builder.UseCommandHandler(type, attr.CommandHandlerType);
             }
+            else
+            {
+                var subAttr = type.GetCustomAttribute<SubCommandHandlerAttribute>();
+                if (subAttr is not null)
+                {
+                    builder.UseCommandHandler(type, subAttr.CommandHandlerType);
+                }
+            }
         }
 
         foreach (var cmd in command.Subcommands)

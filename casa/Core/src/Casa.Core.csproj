@@ -2,26 +2,20 @@
 
   <PropertyGroup>
     <LibFx Condition="$(LibFx) == ''">net7.0</LibFx>
-    <TargetFrameworks>$(LibFx)</TargetFrameworks>
+    <TargetFrameworks>$(CoreFx)</TargetFrameworks>
     <Nullable>enable</Nullable>
     <ImplicitUsings>true</ImplicitUsings>
-    <RootNamespace>Bearz.Extensions.Hosting.CommandLine</RootNamespace>
+    <RootNamespace>Casa</RootNamespace>
   </PropertyGroup>
 
   <PropertyGroup>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageTags></PackageTags>
     <Description>
-    Bearz.Extensions.Hosting.CommandLine
+    Casa.Core
     </Description>
     <PackageReleaseNotes>$([System.IO.File]::ReadAllText("$(MSBuildProjectDirectory)/CHANGELOG.md"))</PackageReleaseNotes>
   </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Hosting" />
-    <PackageReference Include="System.CommandLine.Hosting" />
-    <PackageReference Include="System.ComponentModel.Composition" />
-  </ItemGroup>
 
   <ItemGroup>
     <None Include="README.md" Pack="true" PackagePath="\" />
@@ -31,5 +25,9 @@
     <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
       <_Parameter1>$(AssemblyName).Tests</_Parameter1>
     </AssemblyAttribute>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\netfx\Standard\src\Bearz.Standard.csproj" />
   </ItemGroup>
 </Project>
