@@ -24,6 +24,10 @@ public static partial class Path
 
 #if  !NETLEGACY
 
+    [Pure]
+    public static string RelativePath(string relativeTo, string path)
+        => P.GetRelativePath(relativeTo, path);
+
     public static ReadOnlySpan<char> ChangeExtension(ReadOnlySpan<char> path, ReadOnlySpan<char> extension)
     {
         return P.ChangeExtension(path.ToString(), extension.ToString());

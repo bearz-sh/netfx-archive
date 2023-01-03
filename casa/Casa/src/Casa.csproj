@@ -10,6 +10,7 @@
   <ItemGroup>
     <PackageReference Include="CloudFlare.Client" />
     <PackageReference Include="EFCore.NamingConventions" />
+    <PackageReference Include="Handlebars.Net" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" />
   </ItemGroup>
 

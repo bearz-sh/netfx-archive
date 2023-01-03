@@ -14,6 +14,7 @@ public class NetworkCommand : Command
         this.AddCommand(new NetworkCreateCommand());
         this.AddCommand(new NetworkLsCommand());
         this.AddCommand(new NetworkRemoveCommand());
+        this.AddCommand(new NetworkDefaultCommand());
     }
 }
 

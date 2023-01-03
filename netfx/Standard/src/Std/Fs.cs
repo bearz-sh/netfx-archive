@@ -22,6 +22,9 @@ public static partial class Fs
         }
     }
 
+    public static FileAttributes Stat(string path)
+        => File.GetAttributes(path);
+
 #if NET6_0_OR_GREATER
     public static Task<byte[]> ReadFileAsync(string path, CancellationToken cancellationToken = default)
         => File.ReadAllBytesAsync(path, cancellationToken);

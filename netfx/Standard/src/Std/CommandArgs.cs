@@ -214,16 +214,6 @@ public class CommandArgs : List<string>
         return new CommandArgs(args);
     }
 
-    public string Unshift()
-    {
-        if (this.Count == 0)
-            throw new InvalidOperationException("CommandArgs is empty");
-
-        var item = this[0];
-        this.RemoveAt(0);
-        return item;
-    }
-
     [SuppressMessage("", "SA1100:Do not prefix calls with base unless local implementation exists", Justification = "required")]
     public void Add(ReadOnlySpan<char> item)
         => base.Add(item.ToString());

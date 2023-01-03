@@ -1,3 +1,5 @@
+using Bearz.Std;
+
 using Casa.Domain;
 
 using Environment = Casa.Domain.Environment;
@@ -6,6 +8,28 @@ namespace Casa.Cmds.Utils;
 
 public static class EnvUtils
 {
+    public static bool UseSudo()
+    {
+        if (OperatingSystem.IsWindows() || OperatingSystem.IsBrowser())
+            return false;
+
+        if (Env.Get("SUDO_USER") != null || Env.Get("SUDO_UID") != null)
+            return false;
+
+        return true;
+    }
+
+    public static bool UseSudoForDocker()
+    {
+        var rootless = Env.Get("DOCKER_ROOTLESS");
+        if (UseSudo())
+        {
+            return rootless is not "1";
+        }
+
+        return false;
+    }
+    
     public static Environment? FindEnvironment(string? envName, Settings settings, Domain.Environments environments)
     {
         if (string.IsNullOrWhiteSpace(envName))
