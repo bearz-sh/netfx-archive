@@ -66,7 +66,6 @@ public class AesGcmEncryptionProvider : IEncryptionProvider
         var tag = encryptedData.Slice(4 + nonceSize + 4, tagSize);
         var cipherBytes = encryptedData.Slice(4 + nonceSize + 4 + tagSize, cipherSize);
 
-
         // Decrypt
         Span<byte> plainBytes = new byte[cipherSize];
         using var aes = new AesGcm(this.key);

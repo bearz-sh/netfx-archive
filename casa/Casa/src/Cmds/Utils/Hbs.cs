@@ -286,6 +286,8 @@ public static class Hbs
     {
         var global = environments.GetOrCreate("global");
         var envName = settings.Get("env.name");
+        if (envName is null)
+            throw new InvalidOperationException("env.name is not set in the config. Call casa env set <name>' ");
         var env1 = environments.GetOrCreate(envName);
 
         var env = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
@@ -308,7 +310,6 @@ public static class Hbs
         {
             env.Add(secret.Name, secret.Value);
         }
-
 
         HandlebarsDotNet.Handlebars.RegisterHelper("env", (c, args) =>
         {

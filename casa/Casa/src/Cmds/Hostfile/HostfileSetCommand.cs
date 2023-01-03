@@ -33,6 +33,12 @@ public class HostfileSetCommandHandler : ICommandHandler
 
     public int Invoke(InvocationContext context)
     {
+        if (!Env.IsUserElevated)
+        {
+            Console.Error.WriteLine("User must be elevated as administrator or root to run this command");
+            return -1;
+        }
+
         var hostfile = "/etc/hosts";
         if (OperatingSystem.IsWindows())
         {

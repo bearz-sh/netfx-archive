@@ -218,6 +218,36 @@ public class CommandArgs : List<string>
     public void Add(ReadOnlySpan<char> item)
         => base.Add(item.ToString());
 
+    public void Add(string item1, string item2)
+    {
+        this.Add(item1);
+        this.Add(item2);
+    }
+
+    public void Add(string item1, string item2, string item3)
+    {
+        this.Add(item1);
+        this.Add(item2);
+        this.Add(item3);
+    }
+
+    public void Add(string item1, string item2, string item3, string item4)
+    {
+        this.Add(item1);
+        this.Add(item2);
+        this.Add(item3);
+        this.Add(item4);
+    }
+
+    public void Add(string item1, string item2, string item3, string item4, string item5)
+    {
+        this.Add(item1);
+        this.Add(item2);
+        this.Add(item3);
+        this.Add(item4);
+        this.Add(item5);
+    }
+
     public override string ToString()
     {
         var sb = StringBuilderCache.Acquire();

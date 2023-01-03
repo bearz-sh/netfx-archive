@@ -26,9 +26,15 @@ public class HostfileRemoveCommand : Command
 public class HostfileRemoveCommandHandler : ICommandHandler
 {
     public string Host { get; set; } = string.Empty;
-    
+
     public int Invoke(InvocationContext context)
     {
+        if (!Env.IsUserElevated)
+        {
+            Console.Error.WriteLine("User must be elevated as administrator or root to run this command");
+            return -1;
+        }
+
         var hostfile = "/etc/hosts";
         if (OperatingSystem.IsWindows())
         {

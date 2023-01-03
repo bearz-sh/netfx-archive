@@ -29,7 +29,7 @@ public static class EnvUtils
 
         return false;
     }
-    
+
     public static Environment? FindEnvironment(string? envName, Settings settings, Domain.Environments environments)
     {
         if (string.IsNullOrWhiteSpace(envName))
