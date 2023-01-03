@@ -1,4 +1,5 @@
 using System.CommandLine;
+using System.CommandLine.Help;
 using System.CommandLine.Invocation;
 
 using Bearz.Extensions.Hosting.CommandLine;
@@ -32,11 +33,15 @@ public class StackCommandHandler : ICommandHandler
 {
     public int Invoke(InvocationContext context)
     {
-        throw new NotImplementedException();
+        var ctx = new HelpContext(
+            context.HelpBuilder,
+            context.ParseResult.CommandResult.Command,
+            Console.Out,
+            context.ParseResult);
+        context.HelpBuilder.Write(ctx);
+        return 0;
     }
 
     public Task<int> InvokeAsync(InvocationContext context)
-    {
-        throw new NotImplementedException();
-    }
+        => Task.FromResult(this.Invoke(context));
 }

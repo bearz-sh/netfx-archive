@@ -32,6 +32,8 @@ public static class Paths
 
     public static string DataDir { get;  } = Path.Combine(HomeDir, "var", "data");
 
+    public static string CertsDir { get; } = Path.Combine(EtcDir, "etc", "ssl", "certs");
+    
     public static string DockerTemplatesDir { get; } = Path.Combine(HomeDir, "var", "docker", "templates");
 
     public static string DockerAppsDir { get; } = Path.Combine(HomeDir, "var", "docker", "apps");
