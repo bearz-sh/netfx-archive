@@ -18,6 +18,7 @@ public class SecretsCommand : Command
         this.AddCommand(new SecretsRemoveCommand());
         this.AddCommand(new SecretsListCommand());
         this.AddCommand(new SecretsNewCommand());
+        this.AddCommand(new SecretsImportCommand());
     }
 }
 

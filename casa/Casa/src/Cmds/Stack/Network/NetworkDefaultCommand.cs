@@ -21,6 +21,13 @@ public class NetworkDefaultCommand : Command
 
 public class NetworkDefaultCommandHandler : ICommandHandler
 {
+    private readonly Domain.Settings settings;
+
+    public NetworkDefaultCommandHandler(Domain.Settings settings)
+    {
+        this.settings = settings;
+    }
+
     public int Invoke(InvocationContext context)
     {
         var args = new CommandArgs()
@@ -31,7 +38,7 @@ public class NetworkDefaultCommandHandler : ICommandHandler
             "{{ .Name }}",
         };
 
-        var exe = "docker";
+        var exe = Env.Get("CASA_COMPOSE_CLI") ?? this.settings.Get("compose.cli") ?? "docker";
         if (EnvUtils.UseSudoForDocker())
         {
             exe = "sudo";

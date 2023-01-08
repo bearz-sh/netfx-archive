@@ -4,24 +4,20 @@ using System.CommandLine.Invocation;
 
 using Bearz.Extensions.Hosting.CommandLine;
 
-namespace Casa.Cmds.Environments.Var;
+namespace Casa.Cmds.Config;
 
-[CommandHandler(typeof(VarCommandHandler))]
-public class VarCommand : Command
+[SubCommandHandler(typeof(ConfigCommandHandler))]
+public class ConfigCommand : Command
 {
-    public VarCommand()
-        : base("var", "Manage environment variables")
+    public ConfigCommand()
+        : base("config", "Manages configuration for the command line tool")
     {
-        this.AddOption(new Option<string?>(new[] { "env", "e" }, "The environment to use."));
-        this.AddCommand(new VarGetCommand());
-        this.AddCommand(new VarSetCommand());
-        this.AddCommand(new VarListCommand());
-        this.AddCommand(new VarRemoveCommand());
-        this.AddCommand(new VarImportCommand());
+        this.AddCommand(new ConfigGetCommand());
+        this.AddCommand(new ConfigSetCommand());
     }
 }
 
-public class VarCommandHandler : ICommandHandler
+public class ConfigCommandHandler : ICommandHandler
 {
     public int Invoke(InvocationContext context)
     {

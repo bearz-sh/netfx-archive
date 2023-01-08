@@ -102,7 +102,5 @@ public class StackLsCommandHandler : ICommandHandler
     }
 
     public Task<int> InvokeAsync(InvocationContext context)
-    {
-        throw new NotImplementedException();
-    }
+        => Task.FromResult(this.Invoke(context));
 }

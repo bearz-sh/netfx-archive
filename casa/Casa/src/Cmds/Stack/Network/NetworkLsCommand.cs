@@ -26,6 +26,13 @@ public class NetworkLsCommand : Command
 
 public class NetworkLsCommandHandler : ICommandHandler
 {
+    private readonly Domain.Settings settings;
+
+    public NetworkLsCommandHandler(Domain.Settings settings)
+    {
+        this.settings = settings;
+    }
+
     public string? Filter { get; set; }
 
     public string? Format { get; set; } = string.Empty;
@@ -56,7 +63,7 @@ public class NetworkLsCommandHandler : ICommandHandler
             args.Add(this.Filter);
         }
 
-        var exe = "docker";
+        var exe = Env.Get("CASA_COMPOSE_CLI") ?? this.settings.Get("compose.cli") ?? "docker";
         if (EnvUtils.UseSudoForDocker())
         {
             exe = "sudo";

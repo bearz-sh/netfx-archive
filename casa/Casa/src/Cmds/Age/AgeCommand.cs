@@ -1,5 +1,4 @@
 using System.CommandLine;
-using System.CommandLine.Help;
 using System.CommandLine.Invocation;
 
 using Bearz.Extensions.Hosting.CommandLine;

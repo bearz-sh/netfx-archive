@@ -59,7 +59,7 @@ public class StackUpCommandHandler : ICommandHandler
         if (!Hbs.RenderDockerEnvFile(this.Stack, this.Env, this.settings, this.environments))
             return -1;
 
-        var exe = "docker";
+        var exe = Bearz.Std.Env.Get("CASA_COMPOSE_CLI") ?? this.settings.Get("compose.cli") ?? "docker";
         var args = new CommandArgs { "compose", "up", "--wait", "--no-recreate" };
 
         if (EnvUtils.UseSudoForDocker())

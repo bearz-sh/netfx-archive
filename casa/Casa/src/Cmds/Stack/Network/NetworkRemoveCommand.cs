@@ -22,12 +22,19 @@ public class NetworkRemoveCommand : Command
 
 public class NetworkRemoveCommandHandler : ICommandHandler
 {
+    private readonly Domain.Settings settings;
+
+    public NetworkRemoveCommandHandler(Domain.Settings settings)
+    {
+        this.settings = settings;
+    }
+
     public string Network { get; set; } = string.Empty;
 
     public int Invoke(InvocationContext context)
     {
         var args = new CommandArgs { "network", "remove", this.Network };
-        var exe = "docker";
+        var exe = Env.Get("CASA_COMPOSE_CLI") ?? this.settings.Get("compose.cli") ?? "docker";
         if (EnvUtils.UseSudoForDocker())
         {
             exe = "sudo";

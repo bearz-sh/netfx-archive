@@ -15,6 +15,7 @@ public class VarRemoveCommand : Command
         : base("remove", "Remove an environment variable")
     {
        this.AddAlias("rm");
+       this.AddArgument(new Argument<string>("name", "The name of the env variable to remove."));
     }
 }
 

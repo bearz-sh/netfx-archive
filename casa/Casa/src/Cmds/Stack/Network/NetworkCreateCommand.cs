@@ -34,6 +34,13 @@ public class NetworkCreateCommand : Command
 
 public class NetworkCreateCommandHandler : ICommandHandler
 {
+    private readonly Domain.Settings settings;
+
+    public NetworkCreateCommandHandler(Domain.Settings settings)
+    {
+        this.settings = settings;
+    }
+
     public string Network { get; set; } = string.Empty;
 
     public bool ConfigOnly { get; set; }
@@ -140,7 +147,7 @@ public class NetworkCreateCommandHandler : ICommandHandler
         }
 
         args.Add(this.Network);
-        var exe = "docker";
+        var exe = Env.Get("CASA_COMPOSE_CLI") ?? this.settings.Get("compose.cli") ?? "docker";
 
         if (EnvUtils.UseSudoForDocker())
         {
