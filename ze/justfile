@@ -1,0 +1,11 @@
+
+
+install-ef:
+    dotnet tool install --global dotnet-ef --version 7.0.1
+
+add-migrations MIGRATION:
+    dotnet ef migrations add "{{ MIGRATION }}" --context CasaDbContext --output-dir Migrations/SqliteMigrations -p ./Data/src -- sqlite 
+    dotnet ef migrations add "{{ MIGRATION }}" --context CasaDbContext --output-dir Migrations/PgMigrations -p ./Data/src -- pg 
+    
+help:
+    dotnet run --project ./Ze/src/ -- --help

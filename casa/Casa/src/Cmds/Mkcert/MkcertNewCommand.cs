@@ -55,7 +55,7 @@ public class MkcertNewCommandHandler : ICommandHandler
 
         foreach (var h in this.Hostnames)
         {
-            args.Add($"\"{h}\"");
+            args.Add($"{h}");
         }
 
         var cmd = Process.CreateCommand(
