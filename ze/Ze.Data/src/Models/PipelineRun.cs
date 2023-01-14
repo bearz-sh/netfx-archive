@@ -26,6 +26,8 @@ public class PipelineRun
 
     public DateTime? CompletedAt { get; set; }
 
+    public string? ExternalId { get; set; }
+
     public string? BranchName { get; set; }
 
     public string? CommitRef { get; set; }

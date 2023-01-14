@@ -18,12 +18,19 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="README.md" Pack="true" PackagePath="\"/>
+    <None Include="README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
   <ItemGroup>
     <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
       <_Parameter1>$(AssemblyName).Tests</_Parameter1>
     </AssemblyAttribute>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\netfx\Security.Cryptography\src\Bearz.Security.Cryptography.csproj" />
+    <ProjectReference Include="..\..\..\netfx\Standard\src\Bearz.Standard.csproj" />
+    <ProjectReference Include="..\..\Ze.Core\src\Ze.Core.csproj" />
+    <ProjectReference Include="..\..\Ze.Data\src\Ze.Data.csproj" />
   </ItemGroup>
 </Project>

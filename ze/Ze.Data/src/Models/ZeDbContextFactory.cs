@@ -7,7 +7,6 @@ public class ZeDbContextFactory : IDesignTimeDbContextFactory<ZeDbContext>
 {
     public ZeDbContext CreateDbContext(string[] args)
     {
-        Console.WriteLine(args);
         if (args.Length == 0)
         {
             var optionsBuilder = new DbContextOptionsBuilder<ZeDbContext>();
@@ -17,7 +16,6 @@ public class ZeDbContextFactory : IDesignTimeDbContextFactory<ZeDbContext>
         }
 
         var type = args[0];
-        Console.WriteLine(type);
         var connectionString = args.Length > 1 ? args[1] : null;
         switch (type)
         {

@@ -31,7 +31,8 @@ public class ZeDbContext : DbContext
     {
         if (!optionsBuilder.IsConfigured)
         {
-            optionsBuilder.UseInMemoryDatabase("casa_db");
+            optionsBuilder.UseSnakeCaseNamingConvention();
+            optionsBuilder.UseInMemoryDatabase("ze_db");
         }
     }
 
@@ -120,6 +121,9 @@ public class ZeDbContext : DbContext
             .HasMaxLength(256);
 
         pipelineRun.Property(o => o.CommitEmail)
+            .HasMaxLength(256);
+
+        pipelineRun.Property(o => o.ExternalId)
             .HasMaxLength(256);
 
         base.OnModelCreating(modelBuilder);

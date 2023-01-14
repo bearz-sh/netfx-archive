@@ -5,7 +5,9 @@
   <ItemGroup>
     <PackageVersion Include="CloudFlare.Client" Version="6.1.4" />
     <PackageVersion Include="EFCore.NamingConventions" Version="7.0.0" />
+    <PackageVersion Include="FluentBuilder" Version="0.7.0" />
     <PackageVersion Include="Handlebars.Net" Version="2.1.2" />
+    <PackageVersion Include="Microsoft.ClearScript.V8" Version="7.3.6" />
     <PackageVersion Include="Microsoft.Extensions.Configuration.Binder" Version="7.0.1" />
     <PackageVersion Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageVersion Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.1" />
