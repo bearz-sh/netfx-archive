@@ -21,7 +21,7 @@ public static class Cli
         PostCliHooks.Add(hook);
     }
 
-    public static Command CreateCommand(ExecutableInfo executableInfo, CliCommand command)
+    public static Command CreateCommand(ExecutableInfo executableInfo, ICliCommand command)
     {
         foreach (var hook in PreCliHooks)
         {
@@ -40,7 +40,50 @@ public static class Cli
         return Process.CreateCommand(exe, si);
     }
 
-    public static CommandOutput Call(ExecutableInfo executableInfo, CliCommand command)
+    public static CommandOutput CallScript(ExecutableInfo executableInfo, CliScriptCommand command)
+    {
+        try
+        {
+            var cmd = CreateCommand(executableInfo, command);
+            var output = cmd.Output();
+
+            foreach (var hook in PostCliHooks)
+            {
+                hook.Next(executableInfo.Location!, command, output);
+            }
+
+            return output;
+        }
+        finally
+        {
+            if (File.Exists(command.FileName))
+                File.Delete(command.FileName);
+        }
+    }
+
+    public static async Task<CommandOutput> CallScriptAsync(ExecutableInfo executableInfo, CliScriptCommand command, CancellationToken cancellationToken = default)
+    {
+        try
+        {
+            var cmd = CreateCommand(executableInfo, command);
+            var output = await cmd.OutputAsync(cancellationToken)
+                .ConfigureAwait(false);
+
+            foreach (var hook in PostCliHooks)
+            {
+                hook.Next(executableInfo.Location!, command, output);
+            }
+
+            return output;
+        }
+        finally
+        {
+            if (File.Exists(command.FileName))
+                File.Delete(command.FileName);
+        }
+    }
+
+    public static CommandOutput Call(ExecutableInfo executableInfo, ICliCommand command)
     {
         var cmd = CreateCommand(executableInfo, command);
         var o = cmd.Output();
@@ -52,7 +95,7 @@ public static class Cli
         return o;
     }
 
-    public static async Task<CommandOutput> CallAsync(ExecutableInfo executableInfo, CliCommand command, CancellationToken cancellationToken = default)
+    public static async Task<CommandOutput> CallAsync(ExecutableInfo executableInfo, ICliCommand command, CancellationToken cancellationToken = default)
     {
         var cmd = CreateCommand(executableInfo, command);
         var o = await cmd.OutputAsync(cancellationToken);

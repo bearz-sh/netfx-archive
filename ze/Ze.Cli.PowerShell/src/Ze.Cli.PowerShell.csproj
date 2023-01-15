@@ -5,14 +5,14 @@
     <TargetFrameworks>$(LibFx)</TargetFrameworks>
     <Nullable>enable</Nullable>
     <ImplicitUsings>true</ImplicitUsings>
-    <RootNamespace>Ze.Cli</RootNamespace>
+    <RootNamespace>Ze.Cli.PowerShell</RootNamespace>
   </PropertyGroup>
 
   <PropertyGroup>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageTags></PackageTags>
     <Description>
-    Ze.Cli
+    Ze.Cli.PowerShell
     </Description>
     <PackageReleaseNotes>$([System.IO.File]::ReadAllText("$(MSBuildProjectDirectory)/CHANGELOG.md"))</PackageReleaseNotes>
   </PropertyGroup>
@@ -28,13 +28,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\netfx\Standard\src\Bearz.Standard.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="FluentBuilder">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
+    <ProjectReference Include="..\..\Ze.Cli\src\Ze.Cli.csproj" />
   </ItemGroup>
 </Project>

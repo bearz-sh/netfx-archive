@@ -43,6 +43,7 @@ public abstract class CliCommand : ICliCommand
             .Where(o => o.Name != nameof(this.CommandName) && o.Name != nameof(this.CliStartInfo))
             .ToList();
         var arguments = new CommandArgs();
+        var spaceAssignment = this.CliAssignmentChar == ' ';
 
         // the cli argument names must be in the order required by the command
         // so that when this loop is run, the arguments are added in the correct order.
@@ -96,14 +97,14 @@ public abstract class CliCommand : ICliCommand
             {
                 if (this.JoinCliArgumentNames.Count > 0 && this.JoinCliArgumentNames.Contains(prop.Name))
                 {
-                    if (this.CliAssignmentChar != ' ')
+                    if (!spaceAssignment)
                         command.Add($"{this.FormatCliOptionName(prop.Name)}{this.CliAssignmentChar}{string.Join(this.CliArrayDelimiter, enumerable)}");
                     else
                         command.Add(this.FormatCliOptionName(prop.Name), string.Join(this.CliArrayDelimiter, enumerable));
                 }
                 else
                 {
-                    if (this.CliAssignmentChar != ' ')
+                    if (!spaceAssignment)
                     {
                         foreach (var item in enumerable)
                         {
@@ -145,7 +146,7 @@ public abstract class CliCommand : ICliCommand
                 }
             }
 
-            if (this.CliAssignmentChar != ' ')
+            if (!spaceAssignment)
                 command.Add($"{this.FormatCliOptionName(prop.Name)}{this.CliAssignmentChar}{str}");
             else
                 command.Add(this.FormatCliOptionName(prop.Name), str);

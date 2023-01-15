@@ -2,5 +2,5 @@ namespace Ze.Cli;
 
 public interface IPreCliHook
 {
-    void Next(ExecutableInfo executable, CliCommand command);
+    void Next(ExecutableInfo executable, ICliCommand command);
 }
