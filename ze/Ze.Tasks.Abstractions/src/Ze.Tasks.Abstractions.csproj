@@ -26,4 +26,15 @@
       <_Parameter1>$(AssemblyName).Tests</_Parameter1>
     </AssemblyAttribute>
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Ze.Virtual.Environment.Abstractions\src\Ze.Virtual.Environment.Abstractions.csproj" />
+    <ProjectReference Include="..\..\Ze.Virtual.FileSystem.Abstractions\src\Ze.Virtual.FileSystem.Abstractions.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
+  </ItemGroup>
 </Project>
