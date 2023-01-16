@@ -33,6 +33,9 @@ public static partial class Fs
     public static string ReadTextFile(string path, Encoding? encoding = null)
         => File.ReadAllText(path, encoding ?? Encodings.Utf8NoBom);
 
+    public static IReadOnlyList<string> ReadAllLines(string path, Encoding? encoding = null)
+        => File.ReadAllLines(path, encoding ?? Encodings.Utf8NoBom);
+
 #if NET6_0_OR_GREATER
     public static Task<string> ReadTextFileAsync(string path, Encoding? encoding = null, CancellationToken cancellationToken = default)
         => File.ReadAllTextAsync(path, encoding ?? Encodings.Utf8NoBom, cancellationToken);
@@ -105,6 +108,9 @@ public static partial class Fs
     public static FileSystemInfo Symlink(string path, string target)
         => File.CreateSymbolicLink(path, target);
 #endif
+
+    public static void WriteAllLines(string path, IEnumerable<string> lines)
+        => File.WriteAllLines(path, lines);
 
     public static void WriteTextFile(string path, string? contents, Encoding? encoding = null, bool append = false)
     {

@@ -1,7 +1,7 @@
 namespace Bearz;
 
-#pragma warning disable S2743 requires a static properties.
-
+#pragma warning disable S2743 // requires a static properties.
+#pragma warning disable S4035 // use IEquatable.
 public class Enum<TEnum, TValue> : IEquatable<TEnum>
     where TEnum : Enum<TEnum, TValue>
 {
@@ -33,8 +33,6 @@ public class Enum<TEnum, TValue> : IEquatable<TEnum>
     public string Name { get; }
 
     public TValue Value { get; }
-
-
 
     private static TEnum[] Set { get; } = Array.Empty<TEnum>();
 
@@ -83,8 +81,11 @@ public class Enum<TEnum, TValue> : IEquatable<TEnum>
         return this.Name;
     }
 
-    public bool Equals(TEnum other)
+    public bool Equals(TEnum? other)
     {
+        if (other is null)
+            return false;
+
         return this.Name == other.Name && EqualityComparer<TValue>.Default.Equals(this.Value, other.Value);
     }
 
