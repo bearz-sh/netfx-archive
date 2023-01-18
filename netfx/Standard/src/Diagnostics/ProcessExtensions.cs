@@ -15,6 +15,47 @@ public static class ProcessExtensions
         return process;
     }
 
+    public static Process Run(this Process process)
+    {
+        process.Start();
+        process.WaitForExit();
+        return process;
+    }
+
+    public static Process Run(this Process process, int timeout)
+    {
+        process.Start();
+        process.WaitForExit(timeout);
+        if (!process.HasExited)
+        {
+            throw new TimeoutException(
+                $"Process {process.Id} {process.StartInfo.FileName} has exceeded the timeout of {timeout} ms.");
+        }
+
+        return process;
+    }
+
+    public static async Task<Process> RunAsync(this Process process, CancellationToken cancellationToken = default)
+    {
+        process.Start();
+        await process.WaitForExitAsync(cancellationToken)
+            .ConfigureAwait(false);
+
+        return process;
+    }
+
+    public static Process ValidateExitCode(this Process process, Func<int, bool>? validate = null)
+    {
+        if (!process.HasExited)
+            return process;
+
+        validate ??= code => code == 0;
+        if (!validate(process.ExitCode))
+            throw new ProcessException(process.ExitCode, process.StartInfo.FileName);
+
+        return process;
+    }
+
     public static Process Tee(this Process process, string fileName, bool append = false)
     {
         process.RedirectTo(Console.Out);

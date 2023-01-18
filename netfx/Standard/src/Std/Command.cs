@@ -1,6 +1,6 @@
-#if NETLEGACY
+using System.Diagnostics;
+
 using Bearz.Diagnostics;
-#endif
 
 using ChildProcess = System.Diagnostics.Process;
 
@@ -64,13 +64,22 @@ public class Command
     public CommandOutput Output()
     {
         using var cmd = new System.Diagnostics.Process();
-        var stdOut = new List<string>();
-        var stdErr = new List<string>();
-        this.SetupOutput(cmd, stdOut, stdErr);
+        this.MapStartInfo(cmd);
+        var (stdOut, stdErr) = this.GetStandardOutput(cmd);
 
         cmd.Start();
+        var started = DateTime.UtcNow;
         var pid = cmd.Id;
-        var started = cmd.StartTime.ToUniversalTime();
+        try
+        {
+            // throws an exception on linux
+            started = cmd.StartTime.ToUniversalTime();
+        }
+        catch (Exception ex)
+        {
+            Debug.Write(ex);
+        }
+
         cmd.EnableRaisingEvents = true;
         if (cmd.StartInfo.RedirectStandardOutput)
             cmd.BeginOutputReadLine();
@@ -84,6 +93,7 @@ public class Command
         return new CommandOutput()
         {
             Id = pid,
+            Executable = cmd.StartInfo.FileName,
             ExitCode = cmd.ExitCode,
             StartedAt = started,
             ExitedAt = ended,
@@ -95,13 +105,23 @@ public class Command
     public async Task<CommandOutput> OutputAsync(CancellationToken cancellationToken = default)
     {
         using var cmd = new System.Diagnostics.Process();
-        var stdOut = new List<string>();
-        var stdErr = new List<string>();
-        this.SetupOutput(cmd, stdOut, stdErr);
+        this.MapStartInfo(cmd);
+        var (stdOut, stdErr) = this.GetStandardOutput(cmd);
 
         cmd.Start();
+        var started = DateTime.UtcNow;
+        try
+        {
+            // throws an exception on linux
+            started = cmd.StartTime.ToUniversalTime();
+        }
+        catch (Exception ex)
+        {
+            Debug.Write(ex);
+        }
+
         var pid = cmd.Id;
-        var started = cmd.StartTime.ToUniversalTime();
+
         cmd.EnableRaisingEvents = true;
         if (cmd.StartInfo.RedirectStandardOutput)
             cmd.BeginOutputReadLine();
@@ -115,6 +135,7 @@ public class Command
         return new CommandOutput()
         {
             Id = pid,
+            Executable = cmd.StartInfo.FileName,
             ExitCode = cmd.ExitCode,
             StartedAt = started,
             ExitedAt = ended,
@@ -137,6 +158,59 @@ public class Command
         return cmd;
     }
 
+    private (IReadOnlyList<string>, IReadOnlyList<string>) GetStandardOutput(ChildProcess cmd)
+    {
+        IReadOnlyList<string> standardOut = Array.Empty<string>();
+        IReadOnlyList<string> standardError = Array.Empty<string>();
+
+        if (this.StartInfo.StdOut != Stdio.Inherit && this.StartInfo.StdOutRedirects.Count == 0)
+        {
+            cmd.StartInfo.RedirectStandardOutput = true;
+            if (this.StartInfo.StdOut == Stdio.Piped)
+            {
+                var stdOut = new List<string>();
+                cmd.OutputDataReceived += (_, e) =>
+                {
+                    if (e.Data == null)
+                        return;
+                    stdOut.Add(e.Data);
+                };
+
+                standardOut = stdOut;
+            }
+            else
+            {
+                // equivalent to /dev/null
+                cmd.OutputDataReceived += (_, _) => { };
+            }
+        }
+
+        if (this.StartInfo.StdErr != Stdio.Inherit && this.StartInfo.StdErrorRedirects.Count == 0)
+        {
+            cmd.StartInfo.RedirectStandardError = true;
+            if (this.StartInfo.StdErr == Stdio.Piped)
+            {
+                var stdErr = new List<string>();
+                cmd.ErrorDataReceived += (_, e) =>
+                {
+                    if (e.Data == null)
+                        return;
+
+                    stdErr.Add(e.Data);
+                };
+
+                standardError = stdErr;
+            }
+            else
+            {
+                // equivalent to /dev/null
+                cmd.ErrorDataReceived += (_, _) => { };
+            }
+        }
+
+        return (standardOut, standardError);
+    }
+
     private void MapStartInfo(ChildProcess cmd)
     {
         cmd.StartInfo.FileName = this.FileName;
@@ -148,6 +222,25 @@ public class Command
 #else
         cmd.StartInfo.Arguments = this.StartInfo.Args.ToString();
 #endif
+        var si = this.StartInfo;
+        if (si.StdOutRedirects.Count > 0)
+        {
+            this.StartInfo.StdOut = Stdio.Piped;
+            foreach (var capture in si.StdOutRedirects)
+            {
+                cmd.RedirectTo(capture);
+            }
+        }
+
+        if (si.StdErrorRedirects.Count > 0)
+        {
+            this.StartInfo.StdErr = Stdio.Piped;
+            foreach (var capture in si.StdErrorRedirects)
+            {
+                cmd.RedirectErrorTo(capture);
+            }
+        }
+
         cmd.StartInfo.WorkingDirectory = this.StartInfo.Cwd;
         cmd.StartInfo.RedirectStandardOutput = this.StartInfo.StdOut != Stdio.Inherit;
         cmd.StartInfo.RedirectStandardError = this.StartInfo.StdErr != Stdio.Inherit;
@@ -168,49 +261,6 @@ public class Command
                 {
                     cmd.StartInfo.Environment[kvp.Key] = kvp.Value;
                 }
-            }
-        }
-    }
-
-    private void SetupOutput(System.Diagnostics.Process cmd, List<string> stdOut, List<string> stdErr)
-    {
-        this.MapStartInfo(cmd);
-        if (this.StartInfo.StdOut != Stdio.Inherit)
-        {
-            cmd.StartInfo.RedirectStandardOutput = true;
-            if (this.StartInfo.StdOut == Stdio.Piped)
-            {
-                cmd.OutputDataReceived += (_, e) =>
-                {
-                    if (e.Data == null)
-                        return;
-                    stdOut.Add(e.Data);
-                };
-            }
-            else
-            {
-                // equivalent to /dev/null
-                cmd.OutputDataReceived += (_, _) => { };
-            }
-        }
-
-        if (this.StartInfo.StdErr != Stdio.Inherit)
-        {
-            cmd.StartInfo.RedirectStandardError = true;
-            if (this.StartInfo.StdErr == Stdio.Piped)
-            {
-                cmd.ErrorDataReceived += (_, e) =>
-                {
-                    if (e.Data == null)
-                        return;
-
-                    stdErr.Add(e.Data);
-                };
-            }
-            else
-            {
-                // equivalent to /dev/null
-                cmd.ErrorDataReceived += (_, _) => { };
             }
         }
     }

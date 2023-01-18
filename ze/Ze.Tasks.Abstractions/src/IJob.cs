@@ -12,5 +12,5 @@ public interface IJob
 
     IReadOnlyList<ITask> Tasks { get; }
 
-    Task<JobStatus> RunAsync(IJobExecutionContext context, CancellationToken cancellationToken = default);
+    Task<JobResult> RunAsync(IJobExecutionContext context, CancellationToken cancellationToken = default);
 }

@@ -5,10 +5,11 @@ using Microsoft.Extensions.Logging;
 
 using Ze.Tasks.Internal;
 
-namespace Ze.Tasks;
+namespace Ze.Tasks.Runners;
 
 public class JobRunner
 {
+    /*
     public async Task<JobStatus> RunAsync(
         string target,
         JobCollection jobs,
@@ -216,4 +217,5 @@ public class JobRunner
 
         public JobStatus Status { get;  }
     }
+    */
 }

@@ -30,10 +30,10 @@ public sealed class ActionTask : ZeTask
         this.action = action;
     }
 
-    public override async Task<TaskStatus> RunAsync(ITaskExecutionContext context, CancellationToken cancellationToken = default)
+    public override async Task<TaskResult> RunAsync(ITaskExecutionContext context, CancellationToken cancellationToken = default)
     {
         if (cancellationToken.IsCancellationRequested)
-            return TaskStatus.Cancelled;
+            return TaskResult.Cancelled();
 
         try
         {
@@ -44,9 +44,9 @@ public sealed class ActionTask : ZeTask
         catch (Exception e)
         {
             context.Log.LogError("Unhandled exception in task {TaskId}: {Exception}", this.Id, e);
-            return TaskStatus.Failed;
+            return TaskResult.Failed();
         }
 
-        return TaskStatus.Completed;
+        return TaskResult.Completed();
     }
 }

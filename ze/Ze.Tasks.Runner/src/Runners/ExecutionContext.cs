@@ -3,6 +3,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 
+using Ze.Tasks.Messages;
+using Ze.Tasks.Runner;
 using Ze.Virtual.Environment;
 using Ze.Virtual.FileSystem;
 
@@ -18,6 +20,8 @@ public abstract class ExecutionContext : IExecutionContext
         this.Path = services.GetService<IPath>() ?? new VirtualPath(this.Env);
         this.Fs = services.GetService<IFileSystem>() ?? new VirtualFileSystem(this.Path);
         this.Log = NullLogger.Instance;
+
+        this.Bus = services.GetRequiredService<IMessageBus>();
 
         var configuration = services.GetService<IConfiguration>();
         if (configuration != null)
@@ -40,6 +44,7 @@ public abstract class ExecutionContext : IExecutionContext
         this.Fs = executionContext.Fs;
         this.Config = executionContext.Config;
         this.Log = NullLogger.Instance;
+        this.Bus = executionContext.Bus;
     }
 
     public IEnvironment Env { get; }
@@ -53,6 +58,8 @@ public abstract class ExecutionContext : IExecutionContext
     public IServiceProvider Services { get; }
 
     public ILogger Log { get; protected set; }
+
+    public IMessageBus Bus { get; set; }
 
     public IConfiguration Config { get; }
 }

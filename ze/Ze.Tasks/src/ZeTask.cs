@@ -18,26 +18,7 @@ public abstract class ZeTask : ITask
     protected ZeTask(string name, string id)
     {
         this.Name = name;
-        var sb = StringBuilderCache.Acquire();
-        foreach (var c in id)
-        {
-            if (char.IsLetterOrDigit(c))
-            {
-                if (char.IsUpper(c))
-                {
-                    sb.Append(char.ToLower(c));
-                    continue;
-                }
-
-                sb.Append(c);
-
-                continue;
-            }
-
-            sb.Append('_');
-        }
-
-        this.Id = StringBuilderCache.GetStringAndRelease(sb);
+        this.Id = IdGenerator.Instance.FromName(id.AsSpan());
     }
 
     public string Id { get; }
@@ -52,7 +33,7 @@ public abstract class ZeTask : ITask
 
     public bool ContinueOnError { get; set; }
 
-    public abstract Task<TaskStatus> RunAsync(
+    public abstract Task<TaskResult> RunAsync(
         ITaskExecutionContext context,
         CancellationToken cancellationToken = default);
 }

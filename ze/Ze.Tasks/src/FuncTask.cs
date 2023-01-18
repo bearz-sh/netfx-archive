@@ -1,5 +1,7 @@
 using Microsoft.Extensions.Logging;
 
+using Ze.Tasks.Messages;
+
 namespace Ze.Tasks;
 
 public class FuncTask : ZeTask
@@ -18,10 +20,10 @@ public class FuncTask : ZeTask
         this.action = action;
     }
 
-    public override async Task<TaskStatus> RunAsync(ITaskExecutionContext context, CancellationToken cancellationToken = default)
+    public override async Task<TaskResult> RunAsync(ITaskExecutionContext context, CancellationToken cancellationToken = default)
     {
         if (cancellationToken.IsCancellationRequested)
-            return TaskStatus.Cancelled;
+            return TaskResult.Cancelled();
 
         try
         {
@@ -29,10 +31,10 @@ public class FuncTask : ZeTask
         }
         catch (Exception e)
         {
-            context.Log.LogError("Unhandled exception in task {TaskId}: {Exception}", this.Id, e);
-            return TaskStatus.Failed;
+            context.Bus.QueueMessage(new TaskErrorMessage(e, this));
+            return TaskResult.Failed();
         }
 
-        return TaskStatus.Completed;
+        return TaskResult.Completed();
     }
 }

@@ -24,4 +24,6 @@ public interface IExecutionContext
     ILogger Log { get; }
 
     IConfiguration Config { get; }
+
+    IMessageBus Bus { get; }
 }

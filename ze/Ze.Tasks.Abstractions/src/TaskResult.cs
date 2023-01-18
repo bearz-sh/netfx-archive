@@ -2,42 +2,25 @@ namespace Ze.Tasks;
 
 public class TaskResult
 {
-    public TaskStatus Status { get; private set; }
-
-    public DateTimeOffset StartedAt { get; private set; }
-
-    public DateTimeOffset FinishedAt { get; private set; }
-
-    public void Skip()
+    internal TaskResult(TaskStatus status)
     {
-        this.StartedAt = DateTimeOffset.UtcNow;
-        this.FinishedAt = this.StartedAt;
-        this.Status = TaskStatus.Skipped;
+        this.Status = status;
     }
 
-    public void Start()
+    public TaskStatus Status { get; }
+
+    public static TaskResult Failed()
     {
-        this.StartedAt = DateTimeOffset.Now;
+        return new TaskResult(TaskStatus.Failed);
     }
 
-    public void Error()
+    public static TaskResult Cancelled()
     {
-        if (this.FinishedAt < this.StartedAt)
-            this.FinishedAt = DateTimeOffset.UtcNow;
-
-        this.Status = TaskStatus.Failed;
+        return new TaskResult(TaskStatus.Failed);
     }
 
-    public void Complete()
+    public static TaskResult Completed()
     {
-        if (this.FinishedAt < this.StartedAt)
-            this.FinishedAt = DateTimeOffset.UtcNow;
-
-        this.Status = TaskStatus.Completed;
-    }
-
-    public void Stop()
-    {
-        this.FinishedAt = DateTimeOffset.UtcNow;
+        return new TaskResult(TaskStatus.Completed);
     }
 }
