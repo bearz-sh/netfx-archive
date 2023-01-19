@@ -9,6 +9,8 @@ public class TaskResult
 
     public TaskStatus Status { get; }
 
+    public static TaskResult Skipped() => new TaskResult(TaskStatus.Skipped);
+
     public static TaskResult Failed()
     {
         return new TaskResult(TaskStatus.Failed);

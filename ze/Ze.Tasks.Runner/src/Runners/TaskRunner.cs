@@ -33,7 +33,7 @@ public class TaskRunner : ITaskRunner
 
         if (options.Targets.Count == 0)
         {
-            bus.QueueMessage(new ErrorMessage("Missing task name."));
+            bus.Publish(new ErrorMessage("Missing task name."));
             return TaskRunnerResult.Failed();
         }
 
@@ -45,15 +45,15 @@ public class TaskRunner : ITaskRunner
                 var rootTask = tasks[taskName];
                 if (rootTask is null)
                 {
-                    bus.QueueMessage(new ErrorMessage($"Unable to find a task with the name '{taskName}'."));
+                    bus.Publish(new ErrorMessage($"Unable to find a task with the name '{taskName}'."));
                     return TaskRunnerResult.Failed();
                 }
 
                 if (rootTask.Dependencies.Count == 0 || options.SkipDependencies)
                 {
                     var ctx = context != null
-                        ? new TaskExecutionContext(rootTask.Id, context)
-                        : new TaskExecutionContext(rootTask.Id, this.services);
+                        ? new TaskExecutionContext(rootTask, context)
+                        : new TaskExecutionContext(rootTask, this.services);
 
                     var ct = cancellationToken;
                     if (rootTask.Timeout > 0)
@@ -65,29 +65,29 @@ public class TaskRunner : ITaskRunner
 
                     if (cancellationToken.IsCancellationRequested)
                     {
-                        bus.QueueMessage(new TaskStartedMessage(rootTask));
-                        bus.QueueMessage(new TaskFinishedMessage(rootTask, TaskStatus.Cancelled));
+                        bus.Publish(new TaskStartedMessage(rootTask));
+                        bus.Publish(new TaskFinishedMessage(rootTask, TaskStatus.Cancelled));
                         return TaskRunnerResult.Cancelled();
                     }
 
                     try
                     {
-                        bus.QueueMessage(new TaskStartedMessage(rootTask));
+                        bus.Publish(new TaskStartedMessage(rootTask));
 
                         await rootTask.RunAsync(ctx, ct)
                             .ConfigureAwait(false);
 
-                        bus.QueueMessage(new TaskFinishedMessage(rootTask, TaskStatus.Completed));
+                        bus.Publish(new TaskFinishedMessage(rootTask, TaskStatus.Completed));
                     }
                     catch (TaskCanceledException)
                     {
-                        bus.QueueMessage(new TaskFinishedMessage(rootTask, TaskStatus.Cancelled));
+                        bus.Publish(new TaskFinishedMessage(rootTask, TaskStatus.Cancelled));
                         return TaskRunnerResult.Cancelled();
                     }
                     catch (Exception ex)
                     {
-                        bus.QueueMessage(new TaskErrorMessage(ex, rootTask));
-                        bus.QueueMessage(new TaskFinishedMessage(rootTask, TaskStatus.Failed));
+                        ctx.Error(ex);
+                        bus.Publish(new TaskFinishedMessage(rootTask, TaskStatus.Failed));
                         return TaskRunnerResult.Failed();
                     }
                 }
@@ -101,7 +101,7 @@ public class TaskRunner : ITaskRunner
                     var task = tasks[target];
                     if (task is null)
                     {
-                        bus.QueueMessage(new ErrorMessage($"No tasks were found for {target}"));
+                        bus.Publish(new ErrorMessage($"No tasks were found for {target}"));
                         return TaskRunnerResult.Failed();
                     }
 
@@ -121,11 +121,15 @@ public class TaskRunner : ITaskRunner
             foreach (var task in tasks)
             {
                 if (failed && !task.ContinueOnError)
+                {
+                    bus.Publish(new TaskStartedMessage(task));
+                    bus.Publish(new TaskFinishedMessage(task, TaskStatus.Skipped));
                     continue;
+                }
 
                 var ctx = parentContext != null
-                    ? new TaskExecutionContext(task.Id, parentContext)
-                    : new TaskExecutionContext(task.Id, this.services);
+                    ? new TaskExecutionContext(task, parentContext)
+                    : new TaskExecutionContext(task, this.services);
 
                 var ct = cancellationToken;
                 if (task.Timeout > 0)
@@ -137,36 +141,40 @@ public class TaskRunner : ITaskRunner
 
                 if (cancellationToken.IsCancellationRequested)
                 {
-                    bus.QueueMessage(new TaskStartedMessage(task));
-                    bus.QueueMessage(new TaskFinishedMessage(task, TaskStatus.Cancelled));
+                    bus.Publish(new TaskStartedMessage(task));
+                    bus.Publish(new TaskFinishedMessage(task, TaskStatus.Cancelled));
                     return TaskRunnerResult.Cancelled();
                 }
 
                 try
                 {
-                    bus.QueueMessage(new TaskStartedMessage(task));
+                    bus.Publish(new TaskStartedMessage(task));
 
-                    var result = await task.RunAsync(ctx, ct)
+                    await task.RunAsync(ctx, ct)
                         .ConfigureAwait(false);
 
-                    if (result.Status == TaskStatus.Failed)
+                    var status = ctx.Status;
+                    switch (status)
                     {
-                        failed = true;
+                        case TaskStatus.Failed:
+                            failed = true;
+                            break;
+                        case TaskStatus.Cancelled:
+                            bus.Publish(new TaskFinishedMessage(task, TaskStatus.Cancelled));
+                            return TaskRunnerResult.Cancelled();
                     }
 
-                    if (result.Status == TaskStatus.Cancelled)
-                    {
-                        bus.QueueMessage(new TaskFinishedMessage(task, TaskStatus.Cancelled));
-                        return TaskRunnerResult.Cancelled();
-                    }
-
-                    bus.QueueMessage(new TaskFinishedMessage(task, result.Status));
+                    bus.Publish(new TaskFinishedMessage(task, status));
+                }
+                catch (TaskCanceledException)
+                {
+                    bus.Publish(new TaskFinishedMessage(task, TaskStatus.Cancelled));
                 }
                 catch (Exception ex)
                 {
                     failed = true;
-                    bus.QueueMessage(new TaskErrorMessage(ex, task));
-                    bus.QueueMessage(new TaskFinishedMessage(task, TaskStatus.Failed));
+                    ctx.Error(ex);
+                    bus.Publish(new TaskFinishedMessage(task, TaskStatus.Failed));
                     continue;
                 }
 
@@ -182,7 +190,7 @@ public class TaskRunner : ITaskRunner
         }
         catch (Exception ex)
         {
-            bus.QueueMessage(new ErrorMessage(ex));
+            bus.Publish(new ErrorMessage(ex));
             return TaskRunnerResult.Failed();
         }
     }

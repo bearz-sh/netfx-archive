@@ -20,21 +20,10 @@ public class FuncTask : ZeTask
         this.action = action;
     }
 
-    public override async Task<TaskResult> RunAsync(ITaskExecutionContext context, CancellationToken cancellationToken = default)
+    protected override Task RunTaskAsync(
+        ITaskExecutionContext context,
+        CancellationToken cancellationToken = default)
     {
-        if (cancellationToken.IsCancellationRequested)
-            return TaskResult.Cancelled();
-
-        try
-        {
-            await this.action(context);
-        }
-        catch (Exception e)
-        {
-            context.Bus.QueueMessage(new TaskErrorMessage(e, this));
-            return TaskResult.Failed();
-        }
-
-        return TaskResult.Completed();
+        return this.action(context);
     }
 }

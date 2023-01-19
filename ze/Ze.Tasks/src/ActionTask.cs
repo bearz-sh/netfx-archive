@@ -30,23 +30,10 @@ public sealed class ActionTask : ZeTask
         this.action = action;
     }
 
-    public override async Task<TaskResult> RunAsync(ITaskExecutionContext context, CancellationToken cancellationToken = default)
+    protected override Task RunTaskAsync(ITaskExecutionContext context, CancellationToken cancellationToken = default)
     {
-        if (cancellationToken.IsCancellationRequested)
-            return TaskResult.Cancelled();
-
-        try
-        {
-            var task = new Task(() => this.action(context), cancellationToken);
-            task.Start();
-            await task;
-        }
-        catch (Exception e)
-        {
-            context.Log.LogError("Unhandled exception in task {TaskId}: {Exception}", this.Id, e);
-            return TaskResult.Failed();
-        }
-
-        return TaskResult.Completed();
+        var task = new Task(() => this.action(context));
+        task.Start();
+        return task;
     }
 }

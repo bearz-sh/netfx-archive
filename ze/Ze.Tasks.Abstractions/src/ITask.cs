@@ -14,5 +14,5 @@ public interface ITask
 
     int Timeout { get; set; }
 
-    Task<TaskResult> RunAsync(ITaskExecutionContext context, CancellationToken cancellationToken = default);
+    Task RunAsync(ITaskExecutionContext context, CancellationToken cancellationToken = default);
 }

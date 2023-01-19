@@ -6,6 +6,8 @@ using Bearz.Text;
 
 using Microsoft.Extensions.Primitives;
 
+using Ze.Tasks.Messages;
+
 namespace Ze.Tasks;
 
 public abstract class ZeTask : ITask
@@ -33,7 +35,31 @@ public abstract class ZeTask : ITask
 
     public bool ContinueOnError { get; set; }
 
-    public abstract Task<TaskResult> RunAsync(
+    public async Task RunAsync(
+        ITaskExecutionContext context,
+        CancellationToken cancellationToken = default)
+    {
+        if (cancellationToken.IsCancellationRequested)
+        {
+            context.Status = TaskStatus.Cancelled;
+            return;
+        }
+
+        try
+        {
+            await this.RunTaskAsync(context, cancellationToken)
+                .ConfigureAwait(false);
+
+            if (context.Status == TaskStatus.None)
+                context.Status = TaskStatus.Completed;
+        }
+        catch (Exception e)
+        {
+            context.Error(e);
+        }
+    }
+
+    protected abstract Task RunTaskAsync(
         ITaskExecutionContext context,
         CancellationToken cancellationToken = default);
 }

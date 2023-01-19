@@ -4,5 +4,11 @@ namespace Ze.Tasks;
 
 public interface IMessageBus : IDisposable
 {
-    bool QueueMessage(IMessage message);
+    void Subscribe(IMessageSink sink);
+
+    void Subscribe(Action<IMessage> capture);
+
+    void Unsubscribe(Action<IMessage> capture);
+
+    bool Publish(IMessage message);
 }
