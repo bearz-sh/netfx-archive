@@ -32,6 +32,8 @@
 
     <NetFx>net472</NetFx>
     <NetTestFx>$(NetFx)</NetTestFx>
+  
+    <NetStandard>netstandard2.0</NetStandard>
 
     <SourceGeneratorFx>netstandard2.0</SourceGeneratorFx>
     <SourceGeneratorTestFx>netstandard2.0</SourceGeneratorTestFx>

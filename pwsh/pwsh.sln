@@ -1,0 +1,57 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".root", ".root", "{CFB5F31B-4E5C-47DA-B9EB-CD8CA0BED7F7}"
+	ProjectSection(SolutionItems) = preProject
+		..\Directory.Build.props = ..\Directory.Build.props
+		..\Directory.Build.targets = ..\Directory.Build.targets
+		..\Directory.Packages.props = ..\Directory.Packages.props
+		..\LICENSE.md = ..\LICENSE.md
+		..\omnisharp.json = ..\omnisharp.json
+		..\README.md = ..\README.md
+		..\version.json = ..\version.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PowerShell.Core", "PowerShell.Core", "{DD805956-5A71-47B2-B4D8-C6C9643136F0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ze.PowerShell.Core", "PowerShell.Core\src\Ze.PowerShell.Core.csproj", "{99C7838B-EC31-4C17-A4CA-434BCEB6CAC6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Bearz", "Bearz", "{4C508467-F345-41B0-B550-34B05EA63457}"
+	ProjectSection(SolutionItems) = preProject
+		..\netfx\Security.Cryptography\src\Bearz.Security.Cryptography.csproj = ..\netfx\Security.Cryptography\src\Bearz.Security.Cryptography.csproj
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bearz.Standard", "..\netfx\Standard\src\Bearz.Standard.csproj", "{72B3D79B-4622-4947-AC10-556CA1704792}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bearz.Text.DotEnv", "..\netfx\Text.DotEnv\src\Bearz.Text.DotEnv.csproj", "{02E73A2F-C99D-4CD8-A1C2-1F280923192E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{99C7838B-EC31-4C17-A4CA-434BCEB6CAC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99C7838B-EC31-4C17-A4CA-434BCEB6CAC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99C7838B-EC31-4C17-A4CA-434BCEB6CAC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99C7838B-EC31-4C17-A4CA-434BCEB6CAC6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72B3D79B-4622-4947-AC10-556CA1704792}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72B3D79B-4622-4947-AC10-556CA1704792}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72B3D79B-4622-4947-AC10-556CA1704792}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72B3D79B-4622-4947-AC10-556CA1704792}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02E73A2F-C99D-4CD8-A1C2-1F280923192E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02E73A2F-C99D-4CD8-A1C2-1F280923192E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02E73A2F-C99D-4CD8-A1C2-1F280923192E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02E73A2F-C99D-4CD8-A1C2-1F280923192E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{99C7838B-EC31-4C17-A4CA-434BCEB6CAC6} = {DD805956-5A71-47B2-B4D8-C6C9643136F0}
+		{72B3D79B-4622-4947-AC10-556CA1704792} = {4C508467-F345-41B0-B550-34B05EA63457}
+		{02E73A2F-C99D-4CD8-A1C2-1F280923192E} = {4C508467-F345-41B0-B550-34B05EA63457}
+	EndGlobalSection
+EndGlobal
