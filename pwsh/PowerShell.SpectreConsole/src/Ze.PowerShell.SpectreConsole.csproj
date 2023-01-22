@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>$(LibFx)</TargetFrameworks>
+    <Nullable>enable</Nullable>
+    <AssemblyName>Ze.PowerShell.SpectreConsole</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="PowerShellStandard.Library">
+      <PrivateAssets>All</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Spectre.Console" />
+  </ItemGroup>
+
+</Project>

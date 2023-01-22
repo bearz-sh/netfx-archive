@@ -23,10 +23,10 @@ public class SetEnvironmentVariableCmdlet : PSCmdlet
 
     [Parameter(ParameterSetName = "Values")]
     [Parameter(ParameterSetName = "NameValue")]
-    public SwitchParameter Secret { get; set; }
+    public SwitchParameter AsSecret { get; set; }
 
-    [Parameter(ParameterSetName = "Values")]
-    [Parameter(ParameterSetName = "NameValue")]
+    [Parameter(ParameterSetName = "Values", Position = 2)]
+    [Parameter(ParameterSetName = "NameValue", Position = 3)]
     public EnvironmentVariableTarget Target { get; set; } = EnvironmentVariableTarget.Process;
 
     protected override void ProcessRecord()
@@ -50,7 +50,7 @@ public class SetEnvironmentVariableCmdlet : PSCmdlet
                 if (value == null)
                     continue;
 
-                if (this.Secret.ToBool())
+                if (this.AsSecret.ToBool())
                 {
                     SecretMasker.Default.Add(value);
                 }
@@ -72,7 +72,7 @@ public class SetEnvironmentVariableCmdlet : PSCmdlet
             return;
         }
 
-        if (this.Secret.ToBool())
+        if (this.AsSecret.ToBool())
         {
             SecretMasker.Default.Add(this.Value);
         }

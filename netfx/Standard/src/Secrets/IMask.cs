@@ -5,7 +5,8 @@ namespace Bearz.Secrets;
 
 public interface IMask
 {
-    string? Mask([NotNullIfNotNull("value")] string? value);
+    [return: NotNullIfNotNull("value")]
+    string? Mask(string? value);
 
     ReadOnlySpan<char> Mask(ReadOnlySpan<char> value);
 }

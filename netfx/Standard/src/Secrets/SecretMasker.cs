@@ -45,7 +45,8 @@ public class SecretMasker : ISecretMasker
         return value.SearchAndReplace(this.Secrets, "**********".AsSpan(), StringComparison.OrdinalIgnoreCase);
     }
 
-    public string? Mask([NotNullIfNotNull("value")] string? value)
+    [return: NotNullIfNotNull("value")]
+    public string? Mask(string? value)
     {
         if (value is null || string.IsNullOrWhiteSpace(value))
             return value;

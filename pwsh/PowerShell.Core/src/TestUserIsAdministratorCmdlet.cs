@@ -4,7 +4,7 @@ using Bearz.Std;
 
 namespace Ze.PowerShell.Core;
 
-[Alias("isadmin")]
+[Alias("is-admin")]
 [Cmdlet(VerbsDiagnostic.Test, "UserIsAdministrator")]
 [OutputType(typeof(bool))]
 public class TestUserIsAdministratorCmdlet : Cmdlet

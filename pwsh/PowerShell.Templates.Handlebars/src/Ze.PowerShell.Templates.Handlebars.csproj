@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>$(LibFx)</TargetFrameworks>
+    <AssemblyName>Ze.PowerShell.Templates.Handlebars</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Handlebars.Net" />
+    <PackageReference Include="PowerShellStandard.Library">
+      <PrivateAssets>All</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\netfx\Standard\src\Bearz.Standard.csproj" />
+  </ItemGroup>
+
+</Project>

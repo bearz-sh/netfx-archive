@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net6.0;$(CoreFx);$(NetFx)</TargetFrameworks>
+    <AssemblyName>Ze.PowerShell.X509Certificates</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="PowerShellStandard.Library">
+      <PrivateAssets>All</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\netfx\Security.Cryptography.X509Certificates\src\Bearz.Security.Cryptography.X509Certificates.csproj" />
+  </ItemGroup>
+
+</Project>
+
