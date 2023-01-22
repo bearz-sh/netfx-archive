@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Management.Automation;
@@ -16,18 +17,19 @@ public class InvokeDbCmdCmdlet : DbCmdlet
     {
         var cmd = this.GenerateCommand();
         var connection = cmd.Connection;
+        if (connection is null)
+            throw new InvalidOperationException("The connection for the command is null");
+
         var transaction = cmd.Transaction;
         bool close = false;
         bool commit = false;
 
-        var ex = new PSObject[0][];
-
         try
         {
-            if (cmd.Connection.State == ConnectionState.Closed)
+            if (connection.State == ConnectionState.Closed)
             {
                 close = true;
-                cmd.Connection.Open();
+                connection.Open();
             }
 
             if (this.UseTransaction && transaction is null)
@@ -59,7 +61,6 @@ public class InvokeDbCmdCmdlet : DbCmdlet
                             multiple.Add(set.ToArray());
                         }
                         while (dr.NextResult());
-
 
                         if (multiple.Count > 1)
                         {
@@ -98,7 +99,7 @@ public class InvokeDbCmdCmdlet : DbCmdlet
             }
 
             if (commit)
-                transaction.Commit();
+                transaction?.Commit();
         }
         catch
         {

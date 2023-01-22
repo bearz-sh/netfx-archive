@@ -29,6 +29,7 @@
 
   <ItemGroup>
     <PackageReference Include="Handlebars.Net" />
+    <PackageReference Include="Humanizer.Core" />
     <PackageReference Include="Microsoft.Extensions.Configuration" />
   </ItemGroup>
 

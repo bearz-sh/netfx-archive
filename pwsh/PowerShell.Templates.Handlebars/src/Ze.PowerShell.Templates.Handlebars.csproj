@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>$(LibFx)</TargetFrameworks>
+    <Nullable>enable</Nullable>
     <AssemblyName>Ze.PowerShell.Templates.Handlebars</AssemblyName>
   </PropertyGroup>
 
@@ -14,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\netfx\Standard\src\Bearz.Standard.csproj" />
+    <ProjectReference Include="..\..\..\netfx\Templates.Handlebars\src\Bearz.Templates.Handlebars.csproj" />
   </ItemGroup>
 
 </Project>

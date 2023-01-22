@@ -15,16 +15,18 @@ public class ReadDbDataCmdlet : DbCmdlet
     {
         var cmd = this.GenerateCommand();
         var connection = cmd.Connection;
+        if (connection is null)
+            throw new InvalidOperationException("The connection for the command is null");
         var transaction = cmd.Transaction;
         bool close = false;
         bool commit = false;
 
         try
         {
-            if (cmd.Connection.State == ConnectionState.Closed)
+            if (connection.State == ConnectionState.Closed)
             {
                 close = true;
-                cmd.Connection.Open();
+                connection.Open();
             }
 
             if (this.UseTransaction && transaction is null)
@@ -71,7 +73,7 @@ public class ReadDbDataCmdlet : DbCmdlet
             }
 
             if (commit)
-                transaction.Commit();
+                transaction?.Commit();
         }
         catch
         {

@@ -22,8 +22,13 @@
      <PackageReference Include="PowerShellStandard.Library">
        <PrivateAssets>All</PrivateAssets>
      </PackageReference>
+    
   </ItemGroup>  
     
+    
+   <ItemGroup Condition="'$(TargetFramework)' == '$(NetStandard)'">
+        <PackageReference Include="System.Runtime.Loader" Version="4.3.0" />
+   </ItemGroup>
 
   <ItemGroup>
     <None Include="README.md" Pack="true" PackagePath="\" />
@@ -38,4 +43,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\netfx\Standard\src\Bearz.Standard.csproj" />
   </ItemGroup>
+
+  
 </Project>

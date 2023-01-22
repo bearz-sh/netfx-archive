@@ -9,7 +9,7 @@ using Microsoft.Data.Sqlite;
 
 namespace Ze.PowerShell.DbCmd;
 
-public class DbCmdModuleState
+public static class DbCmdModuleState
 {
     static DbCmdModuleState()
     {
@@ -21,7 +21,7 @@ public class DbCmdModuleState
         ProviderFactories["microsoft.data.sqlclient"] = SqlClientFactory.Instance;
     }
 
-    public static Dictionary<string, DbProviderFactory> ProviderFactories { get; } = new (StringComparer.OrdinalIgnoreCase);
+    public static Dictionary<string, DbProviderFactory> ProviderFactories { get; } = new(StringComparer.OrdinalIgnoreCase);
 
     public static Dictionary<string, string> ConnectionStrings { get; } = new(StringComparer.OrdinalIgnoreCase);
 

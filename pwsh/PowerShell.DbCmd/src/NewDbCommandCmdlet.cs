@@ -25,6 +25,9 @@ public class NewDbCommandCmdlet : DbCmdlet
         }
 
         var connection = command.Connection;
+        if (connection is null)
+            throw new InvalidOperationException("The command has no connection.");
+
         var transaction = command.Transaction;
         bool close = false;
         if (this.ConnectionOwned || connection.State != ConnectionState.Open)

@@ -9,7 +9,7 @@ using Hb = HandlebarsDotNet.Handlebars;
 
 namespace Bearz.Templates.Handlebars;
 
-public static class Register
+public static partial class Helpers
 {
     [CLSCompliant(false)]
     public static void EnvHelpers(IHandlebars? hb)
@@ -98,12 +98,7 @@ public static class Register
             if (section.Value is null)
                 return false;
 
-            if (section.Value.EqualsIgnoreCase("true") || section.Value == "1" ||
-                section.Value.EqualsIgnoreCase("enabled") ||
-                section.Value.EqualsIgnoreCase("yes") || section.Value.EqualsIgnoreCase("y"))
-                return true;
-
-            return false;
+            return section.Value.AsBool(false);
         };
 
         Hb.RegisterHelper("conf-bool", (_, args) =>

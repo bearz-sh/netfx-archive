@@ -1,3 +1,4 @@
+using System;
 using System.Data;
 using System.Data.Common;
 using System.Diagnostics;
@@ -35,7 +36,7 @@ public abstract class DbCmdlet : PSCmdlet
 
     [Parameter(ParameterSetName = "Provider")]
     public string? ConnectionString { get; set; }
-    
+
     [Parameter(ParameterSetName = "Provider")]
     public string? ConnectionStringName { get; set; }
 
@@ -57,6 +58,9 @@ public abstract class DbCmdlet : PSCmdlet
         if (this.Transaction is not null)
         {
             var connection = this.Transaction.Connection;
+            if (connection is null)
+                throw new InvalidOperationException("Transaction is not associated with a connection.");
+
             command = connection.CreateCommand();
             command.Connection = connection;
             command.Transaction = this.Transaction;

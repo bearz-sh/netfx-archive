@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
@@ -27,21 +28,24 @@ public class WriteDbDataCmdlet : DbCmdlet
     {
         var cmd = this.GenerateCommand();
         var connection = cmd.Connection;
+        if (connection is null)
+            throw new InvalidOperationException("command.Connection is null");
+
         var transaction = cmd.Transaction;
         bool close = false;
         bool commit = false;
 
         try
         {
-            if (cmd.Connection.State == ConnectionState.Closed)
+            if (connection.State == ConnectionState.Closed)
             {
                 close = true;
-                cmd.Connection.Open();
+                connection.Open();
             }
 
             if (this.UseTransaction && transaction is null)
             {
-                transaction = connection.BeginTransaction();
+                transaction = connection?.BeginTransaction();
                 commit = true;
             }
 
@@ -63,7 +67,7 @@ public class WriteDbDataCmdlet : DbCmdlet
                 }
 
                 if (commit)
-                    transaction.Commit();
+                    transaction?.Commit();
 
                 return;
             }
@@ -86,7 +90,7 @@ public class WriteDbDataCmdlet : DbCmdlet
                 }
 
                 if (commit)
-                    transaction.Commit();
+                    transaction?.Commit();
 
                 return;
             }
@@ -109,7 +113,7 @@ public class WriteDbDataCmdlet : DbCmdlet
                 }
 
                 if (commit)
-                    transaction.Commit();
+                    transaction?.Commit();
 
                 return;
             }
@@ -125,7 +129,7 @@ public class WriteDbDataCmdlet : DbCmdlet
             }
 
             if (commit)
-                transaction.Commit();
+                transaction?.Commit();
         }
         catch
         {
@@ -138,12 +142,12 @@ public class WriteDbDataCmdlet : DbCmdlet
                 transaction?.Dispose();
 
             if (close)
-                connection.Close();
+                connection?.Close();
 
             cmd.Dispose();
 
             if (this.ConnectionOwned)
-                connection.Dispose();
+                connection?.Dispose();
         }
     }
 }

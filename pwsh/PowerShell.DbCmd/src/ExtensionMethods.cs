@@ -58,6 +58,7 @@ internal static class ExtensionMethods
                 else
                     command.Parameters.Add(parameter);
             }
+
             return;
         }
 

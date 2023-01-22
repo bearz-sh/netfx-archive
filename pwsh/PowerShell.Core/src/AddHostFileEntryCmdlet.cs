@@ -4,5 +4,4 @@ namespace Ze.PowerShell.Core;
 
 public class AddHostFileEntryCmdlet : PSCmdlet
 {
-    
 }
