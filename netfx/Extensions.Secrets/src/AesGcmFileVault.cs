@@ -1,6 +1,7 @@
+#if !NETLEGACY
+
 namespace Bearz.Extensions.Secrets;
 
-#if !NETLEGACY
 public class AesGcmFileVault : ISecretsVault, ISecretVaultMetaData
 {
     public Task<IEnumerable<string>> ListNamesAsync()
