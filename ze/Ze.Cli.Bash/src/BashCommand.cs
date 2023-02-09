@@ -1,8 +1,12 @@
+using Bearz.Cli.Execution;
 using Bearz.Extra.Strings;
 using Bearz.Std;
 
+using FluentBuilder;
+
 namespace Ze.Cli.Bash;
 
+[AutoGenerateBuilder]
 public class BashCommand : CliCommand
 {
     public BashCommand()

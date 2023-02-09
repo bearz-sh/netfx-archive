@@ -1,5 +1,6 @@
 ﻿// See https://aka.ms/new-console-template for more information
-
+Console.WriteLine("test");
+/*
 using Bearz.Std;
 
 using Microsoft.Extensions.Configuration;
@@ -8,7 +9,6 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 
 using Ze.Cli;
 using Ze.Cli.Bash;
-using Ze.Tasks;
 
 var r = Bash.Script(
 """
@@ -27,6 +27,7 @@ foreach (var line in r.StdOut)
 {
     Console.WriteLine(line);
 }
+*/
 
 /*
 var services = new ServiceCollection();

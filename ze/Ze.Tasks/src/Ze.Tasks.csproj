@@ -28,7 +28,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Ze.Tasks.Abstractions\src\Ze.Tasks.Abstractions.csproj" />
     <ProjectReference Include="..\..\Ze.Virtual.Environment\src\Ze.Virtual.Environment.csproj" />
     <ProjectReference Include="..\..\Ze.Virtual.FileSystem\src\Ze.Virtual.FileSystem.csproj" />
   </ItemGroup>

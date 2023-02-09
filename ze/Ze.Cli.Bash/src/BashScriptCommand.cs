@@ -1,5 +1,6 @@
 using System.Runtime.InteropServices;
 
+using Bearz.Cli.Execution;
 using Bearz.Extra.Strings;
 using Bearz.Std;
 
@@ -31,21 +32,7 @@ public class BashScriptCommand : CliScriptCommand
         this.Args.Add("--noprofile", "--norc", "-e", "-o", "pipefail");
     }
 
-    protected bool IsWslBash
-    {
-        get
-        {
-            if (this.isWslBash == null)
-            {
-                this.isWslBash = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) &&
-                                 Process.Which("bash")?.EqualsIgnoreCase("c:\\windows\\system32\\bash.exe") == true;
-            }
-
-            return this.isWslBash.Value;
-        }
-    }
-
-    protected override string FileName
+    public override string TempFileName
     {
         get
         {
@@ -67,6 +54,20 @@ public class BashScriptCommand : CliScriptCommand
             }
 
             return this.fileName;
+        }
+    }
+
+    protected bool IsWslBash
+    {
+        get
+        {
+            if (this.isWslBash == null)
+            {
+                this.isWslBash = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) &&
+                                 Process.Which("bash")?.EqualsIgnoreCase("c:\\windows\\system32\\bash.exe") == true;
+            }
+
+            return this.isWslBash.Value;
         }
     }
 

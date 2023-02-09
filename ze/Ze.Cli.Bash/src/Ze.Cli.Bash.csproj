@@ -28,7 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Ze.Cli\src\Ze.Cli.csproj" />
+    <ProjectReference Include="..\..\..\netfx\Extensions.Cli\src\Bearz.Extensions.Cli.csproj" />
   </ItemGroup>
 
   <ItemGroup>

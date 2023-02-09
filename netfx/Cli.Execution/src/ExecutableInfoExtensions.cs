@@ -26,7 +26,7 @@ public static class ExecutableInfoExtensions
         return Process.CreateCommand(exe, si);
     }
 
-    public static CommandOutput CallScript(ExecutableInfo executableInfo, CliScriptCommand command)
+    public static CommandOutput CallScript(this ExecutableInfo executableInfo, CliScriptCommand command)
     {
         try
         {
@@ -69,6 +69,9 @@ public static class ExecutableInfoExtensions
         }
     }
 
+    public static CommandOutput Call(this ExecutableInfo executableInfo, ICliCommandBuilder builder)
+        => Call(executableInfo, builder.Build());
+
     public static CommandOutput Call(this ExecutableInfo executableInfo, ICliCommand command)
     {
         var cmd = CreateCommand(executableInfo, command);
@@ -81,7 +84,18 @@ public static class ExecutableInfoExtensions
         return o;
     }
 
-    public static async Task<CommandOutput> CallAsync(this ExecutableInfo executableInfo, ICliCommand command, CancellationToken cancellationToken = default)
+    public static Task<CommandOutput> CallAsync(
+        this ExecutableInfo executableInfo,
+        ICliCommandBuilder builder,
+        CancellationToken cancellationToken = default)
+    {
+        return CallAsync(executableInfo, builder.Build(), cancellationToken);
+    }
+
+    public static async Task<CommandOutput> CallAsync(
+        this ExecutableInfo executableInfo,
+        ICliCommand command,
+        CancellationToken cancellationToken = default)
     {
         var cmd = CreateCommand(executableInfo, command);
         var o = await cmd.OutputAsync(cancellationToken);

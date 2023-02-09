@@ -1,5 +1,6 @@
 using System.Runtime.InteropServices;
 
+using Bearz.Cli.Execution;
 using Bearz.Std;
 
 namespace Ze.Cli.PowerShell;
@@ -28,9 +29,7 @@ public class PwshScriptCommand : CliScriptCommand
         this.Args.Add("-Command");
     }
 
-    protected override string Extension => ".ps1";
-
-    protected override string FileName
+    public override string TempFileName
     {
         get
         {
@@ -59,9 +58,11 @@ if((Test-Path -LiteralPath variable:LASTEXITCODE))
         }
     }
 
+    protected override string Extension => ".ps1";
+
     public override CommandStartInfo Build()
     {
-        this.Args.Add($". {this.FileName}");
+        this.Args.Add($". {this.TempFileName}");
         return new CommandStartInfo()
         {
             Args = this.Args,

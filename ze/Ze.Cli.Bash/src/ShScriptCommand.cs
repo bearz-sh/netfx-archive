@@ -1,5 +1,5 @@
+/*
 using FluentBuilder;
-
 namespace Ze.Cli.Bash;
 
 [AutoGenerateBuilder]
@@ -25,3 +25,4 @@ public class ShScriptCommand : CliScriptCommand
 
     protected override string Extension => ".sh";
 }
+*/

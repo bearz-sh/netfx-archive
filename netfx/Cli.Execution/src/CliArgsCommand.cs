@@ -15,6 +15,12 @@ public class CliArgsCommand : ICliCommand
 
     public CliStartInfo CliStartInfo { get; } = new CliStartInfo();
 
+    public static implicit operator CliArgsCommand(string value)
+    {
+        var cmd = new CliArgsCommand { CliStartInfo = { Args = CommandArgs.From(value) } };
+        return cmd;
+    }
+
     public CommandStartInfo Build()
     {
         if (!this.CommandName.IsNullOrWhiteSpace())

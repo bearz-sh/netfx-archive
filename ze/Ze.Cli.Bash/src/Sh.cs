@@ -1,3 +1,4 @@
+/*
 using Bearz.Std;
 
 namespace Ze.Cli.Bash;
@@ -48,3 +49,4 @@ public static class Sh
     public static Task<CommandOutput> ScriptAsync(ShScriptCommand command, CancellationToken cancellationToken = default)
         => Cli.CallScriptAsync(Executable, command, cancellationToken);
 }
+*/
