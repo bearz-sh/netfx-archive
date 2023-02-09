@@ -82,7 +82,7 @@ public class VirtualEnvironment : IEnvironment
     public bool Has(string variableName)
         => this.env.ContainsKey(variableName);
 
-    public IReadOnlyDictionary<string, string> List()
+    public IDictionary<string, string> List()
         => new Dictionary<string, string>(this.env, StringComparer.OrdinalIgnoreCase);
 
     public void Delete(string variableName)

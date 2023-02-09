@@ -51,7 +51,7 @@ public interface IEnvironment
 
     bool Has(string variableName);
 
-    IReadOnlyDictionary<string, string> List();
+    IDictionary<string, string> List();
 
     void Delete(string variableName);
 

@@ -1,4 +1,4 @@
-# Bearz.Cli
+# Bearz.Cli.Execution
 <a name="top"></a>
 
 ## Description
@@ -12,11 +12,11 @@
 ## Installation
 
 ```powershell
-dotnet add package Bearz.Cli
+dotnet add package Bearz.Cli.Execution
 ```
 
 ```powershell 
-<PackageReference Include="Bearz.Cli" Version="*" />
+<PackageReference Include="Bearz.Cli.Execution" Version="*" />
 ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>

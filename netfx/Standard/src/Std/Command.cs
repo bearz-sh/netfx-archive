@@ -50,13 +50,13 @@ public class Command
 
     public Command ClearEnv()
     {
-        this.StartInfo.Env ??= new Dictionary<string, string?>();
+        this.StartInfo.Env ??= new Dictionary<string, string>();
         return this;
     }
 
     public Command Env(string name, string value)
     {
-        this.StartInfo.Env ??= new Dictionary<string, string?>();
+        this.StartInfo.Env ??= new Dictionary<string, string>();
         this.StartInfo.Env[name] = value;
         return this;
     }

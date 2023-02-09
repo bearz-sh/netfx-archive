@@ -12,7 +12,7 @@ public class CommandStartInfo
 
     public string? Cwd { get; set; }
 
-    public Dictionary<string, string?>? Env { get; set; }
+    public IDictionary<string, string>? Env { get; set; }
 
     public Stdio StdOut { get; set; }
 
