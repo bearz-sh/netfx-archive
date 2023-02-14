@@ -8,11 +8,17 @@ public abstract class CliScriptCommand : ICliCommand
 {
     private string? fileName;
 
-    public string Script { get; set; } = string.Empty;
+    protected CliScriptCommand(string script, CliStartInfo? cliStartInfo = null)
+    {
+        this.Script = script;
+        this.CliStartInfo = cliStartInfo ?? new CliStartInfo();
+    }
+
+    public string Script { get; set; }
 
     public string? CommandName => null;
 
-    public CliStartInfo CliStartInfo { get; protected set; } = new CliStartInfo();
+    public CliStartInfo CliStartInfo { get; protected set; }
 
     public virtual string TempFileName
     {

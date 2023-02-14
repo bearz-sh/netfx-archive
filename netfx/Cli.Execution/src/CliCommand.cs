@@ -10,14 +10,15 @@ namespace Bearz.Cli.Execution;
 
 public abstract class CliCommand : ICliCommand
 {
-    protected CliCommand(string? name)
+    protected CliCommand(string? name = null, CliStartInfo? startInfo = null)
     {
         this.CommandName = name;
+        this.CliStartInfo = startInfo ?? new CliStartInfo();
     }
 
     public string? CommandName { get; private set; }
 
-    public CliStartInfo CliStartInfo { get; protected set; } = new CliStartInfo();
+    public CliStartInfo CliStartInfo { get; protected set; }
 
     protected char[] CliParameterPrefix { get; set; } = new[] { '-', '-' };
 

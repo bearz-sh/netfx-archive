@@ -28,14 +28,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\netfx\Extensions.Cli.Abstractions\src\Bearz.Extensions.Cli.Abstractions.csproj" />
-    <ProjectReference Include="..\..\..\netfx\Virtual.Environment.Abstractions\src\Bearz.Virtual.Environment.Abstractions.csproj" />
-    <ProjectReference Include="..\..\..\netfx\Virtual.FileSystem.Abstractions\src\Bearz.Virtual.FileSystem.Abstractions.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\netfx\Standard\src\Bearz.Standard.csproj" />
   </ItemGroup>
 </Project>

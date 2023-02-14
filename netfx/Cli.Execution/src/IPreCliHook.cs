@@ -2,5 +2,5 @@ namespace Bearz.Cli.Execution;
 
 public interface IPreCliHook
 {
-    void Next(ExecutableInfo executable, ICliCommand command);
+    void Next(Executable executable, ICliCommand command);
 }

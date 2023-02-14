@@ -9,7 +9,7 @@ namespace Ze.Cli.Bash;
 
 public static partial class Bash
 {
-    public static ExecutableInfo Executable { get; } = new ExecutableInfo()
+    public static Executable Executable { get; } = new Executable()
     {
         Name = "bash",
         Windows = new[]
@@ -21,37 +21,37 @@ public static partial class Bash
     };
 
     public static CommandOutput Run(ICliCommand command)
-        => Executable.Call(command);
+        => Executable.Output(command);
 
     public static CommandOutput Run(CliArgsCommand command)
-        => Executable.Call(command);
+        => Executable.Output(command);
 
     public static CommandOutput Run(ICliCommandBuilder builder)
-        => Executable.Call(builder);
+        => Executable.Output(builder);
 
     public static Task<CommandOutput> RunAsync(ICliCommandBuilder builder, CancellationToken cancellationToken = default)
-        => Executable.CallAsync(builder, cancellationToken);
+        => Executable.OutputAsync(builder, cancellationToken);
 
     public static Task<CommandOutput> RunAsync(CliArgsCommand command, CancellationToken cancellationToken = default)
-        => Executable.CallAsync(command, cancellationToken);
+        => Executable.OutputAsync(command, cancellationToken);
 
     public static Task<CommandOutput> RunAsync(ICliCommand command, CancellationToken cancellationToken = default)
-        => Executable.CallAsync(command, cancellationToken);
+        => Executable.OutputAsync(command, cancellationToken);
 
     public static CommandOutput RunScript(string script, CliStartInfo? startInfo = null)
-        => Executable.CallScript(new BashScriptCommand(script, startInfo ?? new CliStartInfo()));
+        => Executable.OutputScript(new BashScriptCommand(script, startInfo ?? new CliStartInfo()));
 
     public static CommandOutput RunScript(CliScriptCommand command)
-        => Executable.CallScript(command);
+        => Executable.OutputScript(command);
 
     public static Task<CommandOutput> RunScriptAsync(
         string script,
         CliStartInfo? startInfo = null,
         CancellationToken cancellationToken = default)
-        => Executable.CallScriptAsync(new BashScriptCommand(script, startInfo ?? new CliStartInfo()), cancellationToken);
+        => Executable.OutputScriptAsync(new BashScriptCommand(script, startInfo ?? new CliStartInfo()), cancellationToken);
 
     public static Task<CommandOutput> RunScriptAsync(
         CliScriptCommand command,
         CancellationToken cancellationToken = default)
-        => Executable.CallScriptAsync(command, cancellationToken);
+        => Executable.OutputScriptAsync(command, cancellationToken);
 }

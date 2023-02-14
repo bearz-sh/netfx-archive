@@ -28,8 +28,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\netfx\Virtual.Environment\src\Bearz.Virtual.Environment.csproj" />
-    <ProjectReference Include="..\..\..\netfx\Virtual.FileSystem\src\Bearz.Virtual.FileSystem.csproj" />
     <ProjectReference Include="..\..\Ze.Tasks.Abstractions\src\Ze.Tasks.Abstractions.csproj" />
   </ItemGroup>
 
