@@ -1,21 +1,15 @@
-using System;
-using System.Linq;
-
 using Bearz.Cli.Execution;
 using Bearz.Std;
 
-namespace Ze.Cli.Chocolatey;
+// ReSharper disable once CheckNamespace
+namespace Ze.Cli.NerdCtl;
 
-public static class Chocolatey
+public static class NerdCtl
 {
-    public static ExecutableInfo Executable { get; } = new ExecutableInfo
+    public static ExecutableInfo Executable { get; set; } = new ExecutableInfo
     {
-        Name = "choco",
-        Windows = new[]
-        {
-            "%ChocolateyInstall%\\bin\\choco.exe",
-            "%ALLUSERSPROFILE%\\chocolatey\\bin\\choco.exe",
-        },
+        Name = "nerdctl",
+        Linux = new[] { "usr/bin/nertctl", },
     };
 
     public static CommandOutput Run(ICliCommand command)

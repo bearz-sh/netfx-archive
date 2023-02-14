@@ -1,5 +1,9 @@
 ﻿// See https://aka.ms/new-console-template for more information
+
+using static Ze.Cli.Bash.BashModule;
+
 Console.WriteLine("test");
+RunBashScript("echo 'Hello World'");
 /*
 using Bearz.Std;
 

@@ -5,7 +5,7 @@
     <TargetFrameworks>$(LibFx)</TargetFrameworks>
     <Nullable>enable</Nullable>
     <ImplicitUsings>true</ImplicitUsings>
-    <RootNamespace>Ze.Cli.Docker</RootNamespace>
+    <RootNamespace>Ze.Cli</RootNamespace>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -28,8 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\netfx\Standard\src\Bearz.Standard.csproj" />
-    <ProjectReference Include="..\..\Ze.Cli\src\Ze.Cli.csproj" />
+    <ProjectReference Include="..\..\..\netfx\Extensions.Cli\src\Bearz.Extensions.Cli.csproj" />
   </ItemGroup>
 
   <ItemGroup>

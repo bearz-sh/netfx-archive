@@ -28,8 +28,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Ze.Virtual.Environment.Abstractions\src\Ze.Virtual.Environment.Abstractions.csproj" />
-    <ProjectReference Include="..\..\Ze.Virtual.FileSystem.Abstractions\src\Ze.Virtual.FileSystem.Abstractions.csproj" />
+    <ProjectReference Include="..\..\..\netfx\Extensions.Cli.Abstractions\src\Bearz.Extensions.Cli.Abstractions.csproj" />
+    <ProjectReference Include="..\..\..\netfx\Virtual.Environment.Abstractions\src\Bearz.Virtual.Environment.Abstractions.csproj" />
+    <ProjectReference Include="..\..\..\netfx\Virtual.FileSystem.Abstractions\src\Bearz.Virtual.FileSystem.Abstractions.csproj" />
   </ItemGroup>
 
   <ItemGroup>

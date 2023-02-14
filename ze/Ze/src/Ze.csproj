@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\netfx\Extensions.Hosting.CommandLine\src\Bearz.Extensions.Hosting.CommandLine.csproj" />
+    <ProjectReference Include="..\..\Ze.Cli.Bash\src\Ze.Cli.Bash.csproj" />
   </ItemGroup>
 
 </Project>

@@ -7,7 +7,7 @@ using Bearz.Std;
 
 namespace Ze.Cli.Bash;
 
-public static partial class BashCli
+public static partial class Bash
 {
     public static ExecutableInfo Executable { get; } = new ExecutableInfo()
     {
@@ -38,17 +38,17 @@ public static partial class BashCli
     public static Task<CommandOutput> RunAsync(ICliCommand command, CancellationToken cancellationToken = default)
         => Executable.CallAsync(command, cancellationToken);
 
-    public static CommandOutput RunScript(string script, CliStartInfo startInfo)
-        => Executable.CallScript(new BashScriptCommand(script, startInfo));
+    public static CommandOutput RunScript(string script, CliStartInfo? startInfo = null)
+        => Executable.CallScript(new BashScriptCommand(script, startInfo ?? new CliStartInfo()));
 
     public static CommandOutput RunScript(CliScriptCommand command)
         => Executable.CallScript(command);
 
     public static Task<CommandOutput> RunScriptAsync(
         string script,
-        CliStartInfo startInfo,
+        CliStartInfo? startInfo = null,
         CancellationToken cancellationToken = default)
-        => Executable.CallScriptAsync(new BashScriptCommand(script, startInfo), cancellationToken);
+        => Executable.CallScriptAsync(new BashScriptCommand(script, startInfo ?? new CliStartInfo()), cancellationToken);
 
     public static Task<CommandOutput> RunScriptAsync(
         CliScriptCommand command,

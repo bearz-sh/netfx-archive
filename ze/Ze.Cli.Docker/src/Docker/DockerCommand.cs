@@ -1,3 +1,5 @@
+using Bearz.Cli.Execution;
+
 namespace Ze.Cli.Docker;
 
 public abstract class DockerCommand : CliCommand

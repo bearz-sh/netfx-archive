@@ -1,21 +1,18 @@
-using System;
-using System.Linq;
-
 using Bearz.Cli.Execution;
+using Bearz.Extra.Collections;
 using Bearz.Std;
 
-namespace Ze.Cli.Chocolatey;
+using Ze.Cli;
 
-public static class Chocolatey
+namespace Ze.Cli.Docker;
+
+public static partial class Docker
 {
-    public static ExecutableInfo Executable { get; } = new ExecutableInfo
+    public static ExecutableInfo Executable { get; set; } = new ExecutableInfo
     {
-        Name = "choco",
-        Windows = new[]
-        {
-            "%ChocolateyInstall%\\bin\\choco.exe",
-            "%ALLUSERSPROFILE%\\chocolatey\\bin\\choco.exe",
-        },
+        Name = "docker",
+        Windows = new[] { "%Program Files%\\Docker\\Docker\\resources\\bin\\docker.exe", },
+        Linux = new[] { "usr/bin/docker" },
     };
 
     public static CommandOutput Run(ICliCommand command)

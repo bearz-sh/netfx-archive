@@ -1,11 +1,13 @@
+using Bearz.Extensions.Console;
+using Bearz.Virtual.Environment;
+using Bearz.Virtual.FileSystem;
+
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 
 using Ze.Tasks.Messages;
-using Ze.Virtual.Environment;
-using Ze.Virtual.FileSystem;
 
 namespace Ze.Tasks.Internal;
 
@@ -18,6 +20,7 @@ public abstract class ExecutionContext : IExecutionContext
         this.Process = services.GetService<IProcess>() ?? new VirtualProcess(this.Env);
         this.Path = services.GetService<IPath>() ?? new VirtualPath(this.Env);
         this.Fs = services.GetService<IFileSystem>() ?? new VirtualFileSystem(this.Path);
+        this.ConsoleHost = services.GetService<IConsoleHost>() ?? new ConsoleHost();
         this.Log = NullLogger.Instance;
 
         this.Bus = services.GetRequiredService<IMessageBus>();
@@ -42,6 +45,7 @@ public abstract class ExecutionContext : IExecutionContext
         this.Path = executionContext.Path;
         this.Fs = executionContext.Fs;
         this.Config = executionContext.Config;
+        this.ConsoleHost = executionContext.ConsoleHost;
         this.Log = NullLogger.Instance;
         this.Bus = executionContext.Bus;
     }
@@ -53,6 +57,8 @@ public abstract class ExecutionContext : IExecutionContext
     public IPath Path { get; }
 
     public IFileSystem Fs { get; }
+
+    public IConsoleHost ConsoleHost { get; }
 
     public IServiceProvider Services { get; }
 

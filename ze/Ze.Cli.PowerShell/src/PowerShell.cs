@@ -3,13 +3,14 @@ using Bearz.Std;
 
 namespace Ze.Cli.PowerShell;
 
-public static class PwshCli
+public static class PowerShell
 {
     public static ExecutableInfo Executable { get; } = new ExecutableInfo
     {
-        Name = "pwsh",
+        Name = "powershell",
         Windows = new[]
         {
+            "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
             "%ProgramFiles%\\PowerShell\\7\\pwsh.exe",
             "%ProgramFiles(x86)%\\PowerShell\\7\\pwsh.exe",
             "%ProgramFiles%\\PowerShell\\6\\pwsh.exe",

@@ -7,8 +7,25 @@ using Bearz.Std;
 
 namespace Bearz.Extensions.Cli;
 
-public static class ExecutionInfoContextExtensions
+public static class ExecutableInfoContextExtensions
 {
+    public static ExecutableInfo Clone(this ExecutableInfo executableInfo)
+    {
+        return new ExecutableInfo()
+        {
+            Name = executableInfo.Name,
+            Location = executableInfo.Location,
+            Linux = executableInfo.Linux,
+            Windows = executableInfo.Windows,
+            MacOs = executableInfo.MacOs,
+        };
+    }
+
+    public static ExecutableInfoContext CloneWithContext(this ExecutableInfo executableInfo, ICliExecutionContext context)
+    {
+        return new ExecutableInfoContext(executableInfo, context);
+    }
+
     public static Command CreateCommand(this ExecutableInfo executableInfo, ICliExecutionContext context, ICliCommand command)
     {
         executableInfo.ApplyPreHooks(command);

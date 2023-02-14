@@ -1,5 +1,3 @@
-using Microsoft.Extensions.Logging;
-
 namespace Ze.Tasks;
 
 public sealed class ActionTask : ZeTask
