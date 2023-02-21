@@ -6,7 +6,7 @@ public class NullSecretVault : ISecretsVault, ISecretVaultMetaData
 {
     public static readonly NullSecretVault Instance = new NullSecretVault();
 
-    public Task<IEnumerable<string>> ListNamesAsync()
+    public Task<IEnumerable<string>> ListNamesAsync(CancellationToken cancellationToken = default)
         => Task.FromResult(this.ListNames());
 
     public IEnumerable<string> ListNames()
@@ -14,13 +14,13 @@ public class NullSecretVault : ISecretsVault, ISecretVaultMetaData
         return Array.Empty<string>();
     }
 
-    public Task<string?> GetSecretAsync(string name)
+    public Task<string?> GetSecretAsync(string name, CancellationToken cancellationToken = default)
         => Task.FromResult<string?>(null);
 
     public string? GetSecret(string name)
         => null;
 
-    public Task SetSecretAsync(string name, string secret)
+    public Task SetSecretAsync(string name, string secret, CancellationToken cancellationToken = default)
         => Task.CompletedTask;
 
     public void SetSecret(string name, string secret)
@@ -28,7 +28,7 @@ public class NullSecretVault : ISecretsVault, ISecretVaultMetaData
         // noop
     }
 
-    public Task DeleteSecretAsync(string name)
+    public Task DeleteSecretAsync(string name, CancellationToken cancellationToken = default)
         => Task.CompletedTask;
 
     public void DeleteSecret(string name)
@@ -39,7 +39,7 @@ public class NullSecretVault : ISecretsVault, ISecretVaultMetaData
     public ISecretRecord CreateRecord(string name)
         => new MemorySecretVault.MemorySecretRecord(name);
 
-    public Task<ISecretRecord?> GetSecretRecordAsync(string name)
+    public Task<ISecretRecord?> GetSecretRecordAsync(string name, CancellationToken cancellationToken = default)
         => Task.FromResult<ISecretRecord?>(null);
 
     public ISecretRecord? GetSecretRecord(string name)
@@ -50,6 +50,6 @@ public class NullSecretVault : ISecretsVault, ISecretVaultMetaData
         // noop
     }
 
-    public Task SetSecretRecordAsync(ISecretRecord record)
+    public Task SetSecretRecordAsync(ISecretRecord record, CancellationToken cancellationToken = default)
         => Task.CompletedTask;
 }

@@ -40,18 +40,110 @@ public static class ConfHelpers
         return section.Value.AsBool(false);
     }
 
+    public static object GetConfValueAsInt32(IConfiguration configuration, Context context, Arguments arguments)
+    {
+        arguments.RequireArgumentLength(1, "conf-int");
+        var key = arguments.GetString(0, string.Empty);
+        if (key.IsNullOrWhiteSpace())
+            throw new HandlebarsException("key must not be null or whitespace");
+        var section = configuration.GetSection(NormalizeConfigKey(key));
+
+        int i = 0;
+        if (arguments.Length > 1)
+            i = arguments.GetInt32(1, 0);
+
+        if (section.Value is null)
+            return i;
+
+        if (int.TryParse(section.Value, out var v))
+            return v;
+
+        return i;
+    }
+
+    public static object GetConfValueAsInt64(IConfiguration configuration, Context context, Arguments arguments)
+    {
+        arguments.RequireArgumentLength(1, "conf-int");
+        var key = arguments.GetString(0, string.Empty);
+        if (key.IsNullOrWhiteSpace())
+            throw new HandlebarsException("key must not be null or whitespace");
+        var section = configuration.GetSection(NormalizeConfigKey(key));
+
+        long i = 0;
+        if (arguments.Length > 1)
+            i = arguments.GetInt64(1, 0);
+
+        if (section.Value is null)
+            return i;
+
+        if (int.TryParse(section.Value, out var v))
+            return v;
+
+        return i;
+    }
+
+    public static object GetConfValueAsDecimal(IConfiguration configuration, Context context, Arguments arguments)
+    {
+        arguments.RequireArgumentLength(1, "conf-int");
+        var key = arguments.GetString(0, string.Empty);
+        if (key.IsNullOrWhiteSpace())
+            throw new HandlebarsException("key must not be null or whitespace");
+        var section = configuration.GetSection(NormalizeConfigKey(key));
+
+        decimal i = 0;
+        if (arguments.Length > 1)
+            i = arguments.GetDecimal(1, 0);
+
+        if (section.Value is null)
+            return i;
+
+        if (decimal.TryParse(section.Value, out var v))
+            return v;
+
+        return i;
+    }
+
+    public static object GetConfValueAsDouble(IConfiguration configuration, Context context, Arguments arguments)
+    {
+        arguments.RequireArgumentLength(1, "conf-int");
+        var key = arguments.GetString(0, string.Empty);
+        if (key.IsNullOrWhiteSpace())
+            throw new HandlebarsException("key must not be null or whitespace");
+        var section = configuration.GetSection(NormalizeConfigKey(key));
+
+        double i = 0;
+        if (arguments.Length > 1)
+            i = arguments.GetDouble(1, 0);
+
+        if (section.Value is null)
+            return i;
+
+        if (decimal.TryParse(section.Value, out var v))
+            return v;
+
+        return i;
+    }
+
     [CLSCompliant(false)]
     public static void RegisterConfHelpers(this IHandlebars? hb, IConfiguration configuration)
     {
         if (hb is null)
         {
-            HandlebarsDotNet.Handlebars.RegisterHelper("conf-value", (w, c, a) => GetConfValue(configuration, w, c, a));
-            HandlebarsDotNet.Handlebars.RegisterHelper("conf-bool", (w, c, a) => GetConfValueAsBool(configuration, c, a));
+            HandlebarsDotNet.Handlebars.RegisterHelper("config-value", (w, c, a) => GetConfValue(configuration, w, c, a));
+            HandlebarsDotNet.Handlebars.RegisterHelper("config-bool", (w, c, a) => GetConfValueAsBool(configuration, c, a));
+            HandlebarsDotNet.Handlebars.RegisterHelper("config-int", (w, c, a) => GetConfValueAsInt32(configuration, c, a));
+            HandlebarsDotNet.Handlebars.RegisterHelper("config-long", (w, c, a) => GetConfValueAsInt64(configuration, c, a));
+            HandlebarsDotNet.Handlebars.RegisterHelper("config-decimal", (w, c, a) => GetConfValueAsDecimal(configuration, c, a));
+            HandlebarsDotNet.Handlebars.RegisterHelper("config-double", (w, c, a) => GetConfValueAsDouble(configuration, c, a));
             return;
         }
 
-        hb.RegisterHelper("conf-get", (w, c, a) => GetConfValue(configuration, w, c, a));
-        hb.RegisterHelper("conf-get-bool", (w, c, a) => GetConfValueAsBool(configuration, c, a));
+        hb.RegisterHelper("config-value", (w, c, a) => GetConfValue(configuration, w, c, a));
+        hb.RegisterHelper("config-bool", (w, c, a) => GetConfValueAsBool(configuration, c, a));
+        hb.RegisterHelper("config-int", (w, c, a) => GetConfValueAsInt32(configuration, c, a));
+        hb.RegisterHelper("config-long", (w, c, a) => GetConfValueAsInt64(configuration, c, a));
+        hb.RegisterHelper("config-decimal", (w, c, a) => GetConfValueAsDecimal(configuration, c, a));
+        hb.RegisterHelper("config-double", (w, c, a) => GetConfValueAsDouble(configuration, c, a));
     }
 
     private static string NormalizeConfigKey(string key)

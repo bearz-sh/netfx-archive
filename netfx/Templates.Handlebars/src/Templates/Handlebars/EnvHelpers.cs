@@ -9,7 +9,7 @@ public static class EnvHelpers
 {
     public static void GetEnvVariable(EncodedTextWriter writer, Context context, Arguments arguments)
     {
-        arguments.RequireArgumentLength(1, "ev-get");
+        arguments.RequireArgumentLength(1, "env-value");
 
         var key = arguments[0].ToString();
         if (key.IsNullOrWhiteSpace())
@@ -27,7 +27,7 @@ public static class EnvHelpers
 
     public static object GetEnvVariableAsBool(Context context, Arguments arguments)
     {
-        arguments.RequireArgumentLength(1, "ev-get-bool");
+        arguments.RequireArgumentLength(1, "env-bool");
 
         var key = arguments[0].ToString();
         if (key.IsNullOrWhiteSpace())
@@ -47,7 +47,7 @@ public static class EnvHelpers
 
     public static void ExpandEnvVar(EncodedTextWriter writer, Context context, Arguments arguments)
     {
-        arguments.RequireArgumentLength(1, "ev-expand");
+        arguments.RequireArgumentLength(1, "env-expand");
 
         var template = arguments[0].ToString();
         if (template.IsNullOrWhiteSpace())
@@ -60,15 +60,15 @@ public static class EnvHelpers
     {
         if (hb is null)
         {
-            HandlebarsDotNet.Handlebars.RegisterHelper("ev-get", GetEnvVariable);
-            HandlebarsDotNet.Handlebars.RegisterHelper("ev-get-bool", GetEnvVariableAsBool);
-            HandlebarsDotNet.Handlebars.RegisterHelper("ev-expand", ExpandEnvVar);
+            HandlebarsDotNet.Handlebars.RegisterHelper("env-value", GetEnvVariable);
+            HandlebarsDotNet.Handlebars.RegisterHelper("env-bool", GetEnvVariableAsBool);
+            HandlebarsDotNet.Handlebars.RegisterHelper("env-expand", ExpandEnvVar);
             return;
         }
 
-        hb.RegisterHelper("ev-get", GetEnvVariable);
-        hb.RegisterHelper("ev-get-bool", GetEnvVariableAsBool);
-        hb.RegisterHelper("ev-expand", ExpandEnvVar);
+        hb.RegisterHelper("env-value", GetEnvVariable);
+        hb.RegisterHelper("env-bool", GetEnvVariableAsBool);
+        hb.RegisterHelper("env-expand", ExpandEnvVar);
     }
 
     private static string NormalizeEnvKey(string key)

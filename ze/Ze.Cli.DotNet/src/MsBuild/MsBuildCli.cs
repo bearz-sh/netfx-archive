@@ -2,9 +2,9 @@ using Bearz.Cli.Execution;
 
 namespace Ze.Cli.MsBuild;
 
-public class MsBuildExe : Executable
+public class MsBuildCli : Executable
 {
-    public MsBuildExe()
+    public MsBuildCli()
     {
         this.Name = "MsBuild";
         this.Windows = new[]

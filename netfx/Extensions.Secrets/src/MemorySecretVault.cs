@@ -6,13 +6,13 @@ public class MemorySecretVault : ISecretsVault, ISecretVaultMetaData
 {
     private readonly ConcurrentDictionary<string, ISecretRecord> secrets = new(StringComparer.OrdinalIgnoreCase);
 
-    public Task<IEnumerable<string>> ListNamesAsync()
+    public Task<IEnumerable<string>> ListNamesAsync(CancellationToken cancellationToken = default)
         => Task.FromResult(this.ListNames());
 
     public IEnumerable<string> ListNames()
         => this.secrets.Keys;
 
-    public Task<string?> GetSecretAsync(string name)
+    public Task<string?> GetSecretAsync(string name, CancellationToken cancellationToken = default)
         => Task.FromResult<string?>(this.GetSecret(name));
 
     public string? GetSecret(string name)
@@ -25,7 +25,7 @@ public class MemorySecretVault : ISecretsVault, ISecretVaultMetaData
          return null;
     }
 
-    public Task SetSecretAsync(string name, string secret)
+    public Task SetSecretAsync(string name, string secret, CancellationToken cancellationToken = default)
     {
         this.SetSecret(name, secret);
         return Task.CompletedTask;
@@ -45,7 +45,7 @@ public class MemorySecretVault : ISecretsVault, ISecretVaultMetaData
         this.SetSecretRecord(record);
     }
 
-    public Task DeleteSecretAsync(string name)
+    public Task DeleteSecretAsync(string name, CancellationToken cancellationToken = default)
     {
         this.DeleteSecret(name);
         return Task.CompletedTask;
@@ -59,7 +59,7 @@ public class MemorySecretVault : ISecretsVault, ISecretVaultMetaData
     public ISecretRecord CreateRecord(string name)
         => new MemorySecretRecord(name);
 
-    public Task<ISecretRecord?> GetSecretRecordAsync(string name)
+    public Task<ISecretRecord?> GetSecretRecordAsync(string name, CancellationToken cancellationToken = default)
         => Task.FromResult(this.GetSecretRecord(name));
 
     public ISecretRecord? GetSecretRecord(string name)
@@ -108,7 +108,7 @@ public class MemorySecretVault : ISecretsVault, ISecretVaultMetaData
         }
     }
 
-    public Task SetSecretRecordAsync(ISecretRecord record)
+    public Task SetSecretRecordAsync(ISecretRecord record, CancellationToken cancellationToken = default)
     {
         this.SetSecretRecord(record);
         return Task.CompletedTask;

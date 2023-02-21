@@ -20,6 +20,8 @@ public abstract class CliCommand : ICliCommand
 
     public CliStartInfo CliStartInfo { get; protected set; }
 
+    protected CommandArgs Args => this.CliStartInfo.Args;
+
     protected char[] CliParameterPrefix { get; set; } = new[] { '-', '-' };
 
     protected string CliArrayDelimiter { get; set; } = ",";

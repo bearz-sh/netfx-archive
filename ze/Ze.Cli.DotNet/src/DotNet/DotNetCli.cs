@@ -2,9 +2,9 @@ using Bearz.Cli.Execution;
 
 namespace Ze.Cli.DotNet;
 
-public class DotNetExe : Executable
+public class DotNetCli : Executable
 {
-    public DotNetExe(ICliExecutionContext? context = null)
+    public DotNetCli(ICliExecutionContext? context = null)
         : base(context)
     {
         this.Name = "pwsh";
@@ -15,4 +15,6 @@ public class DotNetExe : Executable
         };
         this.Linux = new[] { "/usr/bin/dotnet", };
     }
+
+    public static DotNetCli Default { get; } = new DotNetCli();
 }

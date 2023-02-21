@@ -2,9 +2,9 @@ using Bearz.Cli.Execution;
 
 namespace Ze.Cli.VsWhere;
 
-public class VsWhereExe : Executable
+public class VsWhereCli : Executable
 {
-    public VsWhereExe(ICliExecutionContext? context = null)
+    public VsWhereCli(ICliExecutionContext? context = null)
         : base(context)
     {
         this.Name = "vswhere";
@@ -15,5 +15,5 @@ public class VsWhereExe : Executable
         };
     }
 
-    public static VsWhereExe Default { get; } = new VsWhereExe();
+    public static VsWhereCli Default { get; } = new VsWhereCli();
 }

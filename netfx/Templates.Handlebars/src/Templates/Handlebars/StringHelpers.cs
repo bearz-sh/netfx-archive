@@ -11,130 +11,129 @@ namespace Bearz.Templates.Handlebars;
 
 public static class StringHelpers
 {
-    public static void EncodeUri(EncodedTextWriter writer, Context context, Arguments arguments)
+    public static string EncodeUri(Context context, Arguments arguments)
     {
         arguments.RequireArgumentLength(1, "encode-uri");
         var value = arguments.GetString(1, string.Empty);
-        writer.Write(System.Net.WebUtility.UrlEncode(value));
+        return System.Net.WebUtility.UrlEncode(value);
     }
 
-    public static void DecodeUri(EncodedTextWriter writer, Context context, Arguments arguments)
+    public static string DecodeUri(Context context, Arguments arguments)
     {
         arguments.RequireArgumentLength(1, "encode-uri");
         var value = arguments.GetString(1, string.Empty);
-        writer.Write(System.Net.WebUtility.UrlDecode(value));
+        return System.Net.WebUtility.UrlDecode(value);
     }
 
-    public static void Titleize(EncodedTextWriter writer, Context context, Arguments arguments)
+    public static string Titleize(Context context, Arguments arguments)
     {
         arguments.RequireArgumentLength(1, "titleize");
         var value = arguments.GetString(0);
-        writer.Write(value.Titleize());
+        return value.Titleize();
     }
 
-    public static void Camelize(EncodedTextWriter writer, Context context, Arguments arguments)
+    public static string Camelize(Context context, Arguments arguments)
     {
         arguments.RequireArgumentLength(1, "camelize");
         var value = arguments.GetString(0);
-        writer.Write(value.Camelize());
+        return value.Camelize();
     }
 
-    public static void Dasherize(EncodedTextWriter writer, Context context, Arguments arguments)
+    public static string Dasherize(Context context, Arguments arguments)
     {
         arguments.RequireArgumentLength(1, "camelize");
         var value = arguments.GetString(0);
-        writer.Write(value.Dasherize());
+        return value.Dasherize();
     }
 
-    public static void Kebaberize(EncodedTextWriter writer, Context context, Arguments arguments)
+    public static string Kebaberize(Context context, Arguments arguments)
     {
         arguments.RequireArgumentLength(1, "kebaberize");
         var value = arguments.GetString(0);
-        writer.Write(value.Kebaberize());
+        return value.Kebaberize();
     }
 
-    public static void Underscore(EncodedTextWriter writer, Context context, Arguments arguments)
+    public static string Underscore(Context context, Arguments arguments)
     {
         arguments.RequireArgumentLength(1, "underscore");
         var value = arguments.GetString(0);
-        writer.Write(value.Underscore());
+        return value.Underscore();
     }
 
-    public static void Humanize(EncodedTextWriter writer, Context context, Arguments arguments)
+    public static string Humanize(Context context, Arguments arguments)
     {
         arguments.RequireArgumentLength(1, "humanize");
         var value = arguments.GetString(0);
-        writer.Write(value.Humanize());
+        return value.Humanize();
     }
 
-    public static void Truncate(EncodedTextWriter writer, Context context, Arguments arguments)
+    public static string Truncate(Context context, Arguments arguments)
     {
         arguments.RequireArgumentLength(2, "truncate");
         var value = arguments.GetString(0);
         var length = arguments.GetInt32(1);
-        writer.Write(value.Truncate(length));
+        return value.Truncate(length);
     }
 
-    public static void TruncateWithEllipsis(EncodedTextWriter writer, Context context, Arguments arguments)
+    public static string TruncateWithEllipsis(Context context, Arguments arguments)
     {
         arguments.RequireArgumentLength(2, "truncate");
         var value = arguments.GetString(0);
         var length = arguments.GetInt32(1);
-        writer.Write(value.Truncate(length, "..."));
+        return value.Truncate(length, "...");
     }
 
-    public static void Pluralize(EncodedTextWriter writer, Context context, Arguments arguments)
+    public static string Pluralize(Context context, Arguments arguments)
     {
         arguments.RequireArgumentLength(1, "pluralize");
         var value = arguments.GetString(0);
-        writer.Write(value.Pluralize());
+        return value.Pluralize();
     }
 
-    public static void Singularize(EncodedTextWriter writer, Context context, Arguments arguments)
+    public static string Singularize(Context context, Arguments arguments)
     {
         arguments.RequireArgumentLength(1, "singularize");
         var value = arguments.GetString(0);
-        writer.Write(value.Singularize());
+        return value.Singularize();
     }
 
-    public static void Ordinalize(EncodedTextWriter writer, Context context, Arguments arguments)
+    public static string Ordinalize(Context context, Arguments arguments)
     {
         arguments.RequireArgumentLength(1, "ordinalize");
         var value = arguments.GetString(0);
-        writer.Write(value.Ordinalize());
+        return value.Ordinalize();
     }
 
-    public static void Capitalize(EncodedTextWriter writer, Context context, Arguments arguments)
+    public static string Capitalize(Context context, Arguments arguments)
     {
         arguments.RequireArgumentLength(1, "upperFirst");
         var value = arguments.GetString(0);
-        writer.Write(value[0].ToString().ToUpper());
-        writer.Write(value.Substring(1));
+        return value[0].ToString().ToUpper() + value.Substring(1);
     }
 
-    public static void ToLower(EncodedTextWriter writer, Context context, Arguments arguments)
+    public static string ToLower(Context context, Arguments arguments)
     {
         arguments.RequireArgumentLength(1, "lower");
         var value = arguments.GetString(0);
-        writer.Write(value.ToLower());
+        return value.ToLower();
     }
 
-    public static void ToUpper(EncodedTextWriter writer, Context context, Arguments arguments)
+    public static string ToUpper(Context context, Arguments arguments)
     {
         arguments.RequireArgumentLength(1, "upper");
         var value = arguments.GetString(0);
-        writer.Write(value.ToUpper());
+        return value.ToUpper();
     }
 
-    public static void Split(EncodedTextWriter writer, Context context, Arguments arguments)
+    public static string[] Split(Context context, Arguments arguments)
     {
         arguments.RequireArgumentLength(2, "split");
         var value = arguments.GetString(0);
         var separator = arguments.GetString(1);
-        writer.Write(value.Split(separator.ToCharArray()));
+        return value.Split(separator.ToCharArray());
     }
 
-    public static void Join(EncodedTextWriter writer, Context context, Arguments arguments)
+    public static string Join(Context context, Arguments arguments)
     {
         arguments.RequireArgumentLength(2, "join");
         var value = arguments[0];
@@ -144,7 +143,7 @@ public static class StringHelpers
         }
 
         var separator = arguments.GetString(1);
-        writer.Write(string.Join(separator, enumerable.Cast<object>()));
+        return string.Join(separator, enumerable.Cast<object>());
     }
 
     public static bool IsString(Context context, Arguments arguments)
@@ -207,7 +206,7 @@ public static class StringHelpers
         return false;
     }
 
-    public static void Concat(EncodedTextWriter writer, Context context, Arguments arguments)
+    public static object Concat(Context context, Arguments arguments)
     {
         arguments.RequireArgumentLength(2, "string-concat");
         var sb = StringBuilderCache.Acquire();
@@ -216,24 +215,24 @@ public static class StringHelpers
             sb.Append(arg);
         }
 
-        writer.Write(StringBuilderCache.GetStringAndRelease(sb));
+        return StringBuilderCache.GetStringAndRelease(sb);
     }
 
-    public static void Base64Encode(EncodedTextWriter writer, Context context, Arguments arguments)
+    public static string Base64Encode(Context context, Arguments arguments)
     {
         arguments.RequireArgumentLength(1, "base64-encode");
         var value = arguments.GetString(0);
-        writer.Write(Convert.ToBase64String(Encodings.Utf8.GetBytes(value)));
+        return Convert.ToBase64String(Encodings.Utf8.GetBytes(value));
     }
 
-    public static void Base64Decode(EncodedTextWriter writer, Context context, Arguments arguments)
+    public static string Base64Decode(Context context, Arguments arguments)
     {
         arguments.RequireArgumentLength(1, "base64-decode");
         var value = arguments.GetString(0);
-        writer.Write(Encodings.Utf8.GetString(Convert.FromBase64String(value)));
+        return Encodings.Utf8.GetString(Convert.FromBase64String(value));
     }
 
-    public static void PadLeft(EncodedTextWriter writer, Context context, Arguments arguments)
+    public static string PadLeft(Context context, Arguments arguments)
     {
         arguments.RequireArgumentLength(2, "pad-left");
         var value = arguments.GetString(0);
@@ -242,10 +241,10 @@ public static class StringHelpers
         if (arguments.Length > 0)
             padding = arguments.GetString(0, " ");
 
-        writer.Write(value.PadLeft(length, padding[0]));
+        return value.PadLeft(length, padding[0]);
     }
 
-    public static void PadRight(EncodedTextWriter writer, Context context, Arguments arguments)
+    public static string PadRight(Context context, Arguments arguments)
     {
         arguments.RequireArgumentLength(2, "pad-right");
         var value = arguments.GetString(0);
@@ -254,58 +253,57 @@ public static class StringHelpers
         if (arguments.Length > 0)
             padding = arguments.GetString(0, " ");
 
-        writer.Write(value.PadRight(length, padding[0]));
+        return value.PadRight(length, padding[0]);
     }
 
-    public static void Replace(EncodedTextWriter writer, Context context, Arguments arguments)
+    public static string Replace(Context context, Arguments arguments)
     {
         arguments.RequireArgumentLength(3, "string-replace");
         var value = arguments.GetString(0);
         var oldValue = arguments.GetString(1);
         var newValue = arguments.GetString(2);
-        writer.Write(value.Replace(oldValue, newValue));
+        return value.Replace(oldValue, newValue);
     }
 
-    public static void Remove(EncodedTextWriter writer, Context context, Arguments arguments)
+    public static string Remove(Context context, Arguments arguments)
     {
         arguments.RequireArgumentLength(2, "string-remove");
         var value = arguments.GetString(0);
         var startIndex = arguments.GetInt32(1);
         var length = arguments.GetInt32(2, value.Length - startIndex);
-        writer.Write(value.Remove(startIndex, length));
+        return value.Remove(startIndex, length);
     }
 
-    public static void Prepend(EncodedTextWriter writer, Context context, Arguments arguments)
+    public static string Prepend(Context context, Arguments arguments)
     {
         arguments.RequireArgumentLength(2, "prepend");
         var value = arguments.GetString(0);
         var prefix = arguments.GetString(1);
-        writer.Write(prefix + value);
+        return prefix + value;
     }
 
-    public static void Append(EncodedTextWriter writer, Context context, Arguments arguments)
+    public static string Append(Context context, Arguments arguments)
     {
         arguments.RequireArgumentLength(2, "append");
         var value = arguments.GetString(0);
         var suffix = arguments.GetString(1);
-        writer.Write(value + suffix);
+        return value + suffix;
     }
 
-    public static void Trim(EncodedTextWriter writer, Context context, Arguments arguments)
+    public static string Trim(Context context, Arguments arguments)
     {
         arguments.RequireArgumentLength(1, "trim");
         var value = arguments.GetString(0);
         if (arguments.Length > 1)
         {
             var chars = arguments.GetString(0, " ").ToCharArray();
-            writer.Write(value.Trim(chars));
-            return;
+            return value.Trim(chars);
         }
 
-        writer.Write(value.Trim());
+        return value.Trim();
     }
 
-    public static void TrimStart(EncodedTextWriter writer, Context context, Arguments arguments)
+    public static object TrimStart(Context context, Arguments arguments)
     {
         arguments.RequireArgumentLength(1, "trim-start");
         var value = arguments.GetString(0);
@@ -313,14 +311,13 @@ public static class StringHelpers
         if (arguments.Length > 1)
         {
             var chars = arguments.GetString(0, " ").ToCharArray();
-            writer.Write(value.TrimStart(chars));
-            return;
+            return value.TrimStart(chars);
         }
 
-        writer.Write(value.TrimStart());
+        return value.TrimStart();
     }
 
-    public static void TrimEnd(EncodedTextWriter writer, Context context, Arguments arguments)
+    public static string TrimEnd(Context context, Arguments arguments)
     {
         arguments.RequireArgumentLength(1, "trim-end");
         var value = arguments.GetString(0);
@@ -328,14 +325,17 @@ public static class StringHelpers
         if (arguments.Length > 1)
         {
             var chars = arguments.GetString(0, " ").ToCharArray();
-            writer.Write(value.TrimEnd(chars));
-            return;
+            return value.TrimEnd(chars);
         }
 
-        writer.Write(value.TrimEnd());
+        return value.TrimEnd();
     }
 
-    public static void Format(IFormatProvider? provider, EncodedTextWriter writer, Context context, Arguments arguments)
+    public static string Format(
+        IFormatProvider? provider,
+        EncodedTextWriter writer,
+        Context context,
+        Arguments arguments)
     {
         arguments.RequireArgumentLength(2, "format");
         var value = arguments[0];
@@ -353,7 +353,7 @@ public static class StringHelpers
         formattedValue ??= value?.ToString();
 
         // Done
-        writer.WriteSafeString(formattedValue ?? string.Empty);
+        return formattedValue ?? string.Empty;
     }
 
     public static bool StartsWith(Context context, Arguments arguments)

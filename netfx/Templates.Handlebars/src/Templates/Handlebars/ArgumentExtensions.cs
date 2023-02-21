@@ -45,6 +45,15 @@ public static class ArgumentExtensions
         return defaultValue;
     }
 
+    public static decimal GetDecimal(this Arguments arguments, int index)
+        => GetDecimal(arguments, index, 0);
+
+    public static decimal GetDecimal(this Arguments arguments, int index, decimal defaultValue)
+    {
+        var argument = arguments[index];
+        return argument.AsDecimal(defaultValue);
+    }
+
     public static double GetDouble(this Arguments arguments, int index)
         => GetDouble(arguments, index, 0);
 
